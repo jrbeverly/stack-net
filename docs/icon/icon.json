@@ -1,12 +1,15 @@
 {
-    "name": "<name>",
+    "name": "Cube",
     "license": "Public Domain",
-    "url": "<url>",
+    "url": "https://thenounproject.com/term/cube/4025/",
     "author": {
-        "name": "<author>",
-        "url": "<author url>"
+        "name": "Christina Witt George",
+        "url": "https://thenounproject.com/christinawittgeorge"
     },
     "tags": [
-        "<tags>"
+        "Cube",
+        "Block",
+        "Dice",
+        "Square"
     ]
 }
