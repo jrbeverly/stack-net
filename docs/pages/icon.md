@@ -1,4 +1,4 @@
-![Project icon](icon.png)
+![Project icon](../../icon/icon.png)
 # Cube
 By [Christina Witt George](https://thenounproject.com/christinawittgeorge), from the [Noun Project](https://thenounproject.com/term/cube/4025/)
 
