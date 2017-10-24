@@ -4,24 +4,16 @@ namespace Stack.NET.Utility
 {
     public sealed class Index3D : IEquatable<Index3D>
     {
-        /// <summary>
-        ///     Gets or sets the x-component of the vector.
-        /// </summary>
+        /// <summary>Gets or sets the x-component of the vector.</summary>
         public int X;
 
-        /// <summary>
-        ///     Gets or sets the y-component of the vector.
-        /// </summary>
+        /// <summary>Gets or sets the y-component of the vector.</summary>
         public int Y;
 
-        /// <summary>
-        ///     Gets or sets the z-component of the vector.
-        /// </summary>
+        /// <summary>Gets or sets the z-component of the vector.</summary>
         public int Z;
 
-        /// <summary>
-        ///     Initializes a new instance of <see cref="Index3D" />.
-        /// </summary>
+        /// <summary>Initializes a new instance of <see cref="Index3D" />.</summary>
         /// <param name="x">Initial value for the x-component of the vector.</param>
         /// <param name="y">Initial value for the y-component of the vector.</param>
         /// <param name="z">Initial value for the z-component of the vector.</param>

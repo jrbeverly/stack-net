@@ -36,8 +36,8 @@ namespace Stack.NET.ViewModel
             ListOfColors = ColorHelper.GetColors();
 
             for (var x = 0; x < 6; x++)
-                for (var z = 0; z < 6; z++)
-                    Grid.Place(x, 0, z, Grid.Surface);
+            for (var z = 0; z < 6; z++)
+                Grid.Place(x, 0, z, Grid.Surface);
 
             _selection = new SelectionViewModel(this, Grid, InitializeSelectionModel());
 
@@ -128,7 +128,7 @@ namespace Stack.NET.ViewModel
                 });
             }
         }
-        
+
         public ICommand MoveForward => _selection.MoveForward;
         public ICommand MoveBackward => _selection.MoveBackward;
         public ICommand MoveLeft => _selection.MoveLeft;

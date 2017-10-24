@@ -4,19 +4,13 @@ using System.Windows.Media.Media3D;
 
 namespace Stack.NET.Construct
 {
-    /// <summary>
-    ///     A builder to construct a <see cref="MeshGeometry3D" /> Cube.
-    /// </summary>
+    /// <summary>A builder to construct a <see cref="MeshGeometry3D" /> Cube.</summary>
     public sealed class CubeBuilder
     {
-        /// <summary>
-        ///     The default width of the cube.
-        /// </summary>
+        /// <summary>The default width of the cube.</summary>
         public const int DEFAULT_WIDTH = 1;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="CubeBuilder" /> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="CubeBuilder" /> class.</summary>
         /// <param name="scale"></param>
         public CubeBuilder(double scale)
         {
@@ -25,18 +19,13 @@ namespace Stack.NET.Construct
             Scale = scale;
         }
 
-        /// <summary>
-        ///     The standard cube size.
-        /// </summary>
+        /// <summary>The standard cube size.</summary>
         public double Scale { get; }
 
-        /// <summary>
-        /// </summary>
+        /// <summary></summary>
         /// <param name="color">The <see cref="Color" /> of the model.</param>
         /// <returns>The 3d geometry mesh.</returns>
-        /// <summary>
-        ///     Constructs a <see cref="GeometryModel3D" /> Cube from the underlying <see cref="ModelBuilder" />.
-        /// </summary>
+        /// <summary>Constructs a <see cref="GeometryModel3D" /> Cube from the underlying <see cref="ModelBuilder" />.</summary>
         /// <param name="color">The cube color.</param>
         /// <param name="x">The bottom-left x-coordinate of the cube.</param>
         /// <param name="y">The bottom-left y-coordinate of the cube.</param>
