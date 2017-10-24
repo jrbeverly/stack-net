@@ -3,14 +3,10 @@ using System.Windows.Media.Media3D;
 
 namespace Stack.NET.Utility
 {
-    /// <summary>
-    ///     Contains commonly used mathematics functions.
-    /// </summary>
+    /// <summary>Contains commonly used mathematics functions.</summary>
     public static class MathHelper
     {
-        /// <summary>
-        ///     Finds normal vector of a triangle given by vertices.
-        /// </summary>
+        /// <summary>Finds normal vector of a triangle given by vertices.</summary>
         /// <param name="p0">Source vertex.</param>
         /// <param name="p1">Source vertex.</param>
         /// <param name="p2">Source vertex.</param>
@@ -26,9 +22,7 @@ namespace Stack.NET.Utility
             return result;
         }
 
-        /// <summary>
-        ///     Linearly interpolates the center between two values.
-        /// </summary>
+        /// <summary>Linearly interpolates the center between two values.</summary>
         /// <param name="value1">Source value.</param>
         /// <param name="value2">Source value.</param>
         /// <returns>Interpolated value.</returns>
@@ -45,9 +39,7 @@ namespace Stack.NET.Utility
             return value1 + (Math.Abs(value2) + (double) Math.Abs(value1)) / 2.0D;
         }
 
-        /// <summary>
-        ///     Returns a vector that contains the highest value from each matching pair of components.
-        /// </summary>
+        /// <summary>Returns a vector that contains the highest value from each matching pair of components.</summary>
         /// <param name="value1">Source vector.</param>
         /// <param name="value2">Source vector.</param>
         /// <returns>The maximized vector.</returns>
@@ -61,9 +53,7 @@ namespace Stack.NET.Utility
             };
         }
 
-        /// <summary>
-        ///     Returns a vector that contains the lowest value from each matching pair of components.
-        /// </summary>
+        /// <summary>Returns a vector that contains the lowest value from each matching pair of components.</summary>
         /// <param name="value1">Source vector.</param>
         /// <param name="value2">Source vector.</param>
         /// <returns>The minimized vector.</returns>

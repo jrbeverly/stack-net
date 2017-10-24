@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Color = System.Windows.Media.Color;
-using ColorConverter = System.Drawing.ColorConverter;
 
 namespace Stack.NET.Utility
 {
@@ -13,7 +12,6 @@ namespace Stack.NET.Utility
     {
         public static IEnumerable<DrawColor> GetColors()
         {
-            var converter = new ColorConverter();
             var kc = new KnownColor();
             foreach (KnownColor knownColor in Enum.GetValues(kc.GetType()))
             {
