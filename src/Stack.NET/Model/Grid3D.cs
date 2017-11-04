@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Utility;
@@ -51,8 +52,8 @@ namespace Stack.NET.Model
 
             foreach (var index in Cubes)
             {
-                vmin = MathHelper.Minimum(vmin, index.Position);
-                vmax = MathHelper.Maximum(vmax, index.Position);
+                vmin = Index3D.Min(vmin, index.Position);
+                vmax = Index3D.Max(vmax, index.Position);
             }
 
             min = vmin;
@@ -62,23 +63,18 @@ namespace Stack.NET.Model
         public Index3D Maximum()
         {
             var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
-            foreach (var index in Cubes)
-                vmax = MathHelper.Maximum(vmax, index.Position);
-            return vmax;
+            return Cubes.Aggregate(vmax, (current, index) => Index3D.Max(current, index.Position));
         }
 
         public Index3D Minimum()
         {
             var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
-            foreach (var index in Cubes)
-                vmin = MathHelper.Minimum(vmin, index.Position);
-            return vmin;
+            return Cubes.Aggregate(vmin, (current, index) => Index3D.Min(current, index.Position));
         }
 
         public Point3D Center()
         {
-            Index3D min, max;
-            Range(out min, out max);
+            Range(out var min, out var max);
 
             var center = new Point3D(
                 MathHelper.Center(min.X, max.X + 1),

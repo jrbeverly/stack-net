@@ -7,7 +7,10 @@ using Color = System.Drawing.Color;
 
 namespace Stack.NET.Converters
 {
-    /// <summary>An implementation of <see cref="IValueConverter" /> that converts <see cref="System.Drawing.Color" /> values to <see cref="System.Windows.Media.Color" /> values.</summary>
+    /// <summary>
+    /// An implementation of <see cref="IValueConverter" /> that converts <see cref="System.Drawing.Color" /> values to
+    /// <see cref="System.Windows.Media.Color" /> values.
+    /// </summary>
     public class ColorToSolidBrushConverter : IValueConverter
     {
         /// <summary>Attempts to convert the specified value.</summary>

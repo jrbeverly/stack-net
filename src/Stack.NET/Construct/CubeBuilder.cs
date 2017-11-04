@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using Stack.NET.Model;
 
 namespace Stack.NET.Construct
 {
-    /// <summary>A builder to construct a <see cref="MeshGeometry3D" /> Cube.</summary>
+    /// <summary>A builder to construct a <see cref="Cube"/>.</summary>
     public sealed class CubeBuilder
     {
         /// <summary>The default width of the cube.</summary>
-        public const int DEFAULT_WIDTH = 1;
+        public const int DefaultWidth = 1;
 
         /// <summary>Initializes a new instance of the <see cref="CubeBuilder" /> class.</summary>
         /// <param name="scale"></param>
@@ -26,14 +27,13 @@ namespace Stack.NET.Construct
         /// <param name="color">The <see cref="Color" /> of the model.</param>
         /// <returns>The 3d geometry mesh.</returns>
         /// <summary>Constructs a <see cref="GeometryModel3D" /> Cube from the underlying <see cref="ModelBuilder" />.</summary>
-        /// <param name="color">The cube color.</param>
         /// <param name="x">The bottom-left x-coordinate of the cube.</param>
         /// <param name="y">The bottom-left y-coordinate of the cube.</param>
         /// <param name="z">The bottom-left z-coordinate of the cube.</param>
         /// <returns>The <see cref="GeometryModel3D" /> cube.</returns>
         public GeometryModel3D Create(Color color, double x = 0, double y = 0, double z = 0)
         {
-            var space = DEFAULT_WIDTH * Scale;
+            var space = DefaultWidth * Scale;
             var points = new Point3D[8]
             {
                 new Point3D(x, y, z),

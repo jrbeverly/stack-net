@@ -43,7 +43,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Z -= 1;
+                    Point = new Index3D(Point.X, Point.Y, Point.Z - 1);
                     OnForward?.Invoke();
                 });
             }
@@ -55,7 +55,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Z += 1;
+                    Point = new Index3D(Point.X, Point.Y, Point.Z + 1);
                     OnBackward?.Invoke();
                 });
             }
@@ -67,7 +67,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.X -= 1;
+                    Point = new Index3D(Point.X + 1, Point.Y, Point.Z);
                     OnLeft?.Invoke();
                 });
             }
@@ -79,7 +79,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.X += 1;
+                    Point = new Index3D(Point.X - 1, Point.Y, Point.Z);
                     OnRight?.Invoke();
                 });
             }
@@ -91,7 +91,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Y += 1;
+                    Point = new Index3D(Point.X, Point.Y + 1, Point.Z);
                     OnUp?.Invoke();
                 });
             }
@@ -103,7 +103,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Y -= 1;
+                    Point = new Index3D(Point.X, Point.Y - 1, Point.Z);
                     OnDown?.Invoke();
                 });
             }

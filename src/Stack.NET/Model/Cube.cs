@@ -4,14 +4,11 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.Model
 {
-    /// <summary>
-    ///     A 3-dimensional cube with surface color.
-    /// </summary>
+    /// <inheritdoc  />
+    /// <summary>A 3-dimensional cube with surface color.</summary>
     public sealed class Cube : IEquatable<Cube>
     {
-        /// <summary>
-        ///     Constructs a <see cref="Cube" /> at the specified position.
-        /// </summary>
+        /// <summary>Constructs a <see cref="Cube" /> at the specified position.</summary>
         /// <param name="position">The position.</param>
         /// <param name="color">The surface color.</param>
         public Cube(Index3D position, Color color)
@@ -20,15 +17,11 @@ namespace Stack.NET.Model
             Position = position;
         }
 
-        /// <summary>
-        ///     The surface color of the cube.
-        /// </summary>
+        /// <summary>The surface color of the cube.</summary>
         public Color Surface { get; set; }
 
-        /// <summary>
-        ///     The grid position of the cube.
-        /// </summary>
-        public Index3D Position { get; set; }
+        /// <summary>The grid position of the cube.</summary>
+        public Index3D Position { get; }
 
         /// <inheritdoc />
         public bool Equals(Cube cube)
@@ -39,8 +32,7 @@ namespace Stack.NET.Model
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            var cube = obj as Cube;
-            return cube != null && Position.Equals(cube.Position) && Surface.Equals(cube.Surface);
+            return obj is Cube cube && Position.Equals(cube.Position) && Surface.Equals(cube.Surface);
         }
 
         /// <inheritdoc />

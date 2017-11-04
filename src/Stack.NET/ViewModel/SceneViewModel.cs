@@ -15,9 +15,8 @@ namespace Stack.NET.ViewModel
 
     internal sealed class SceneViewModel : ObservableObject
     {
-        private const double MOVE = 6.0;
-        private const double ROTATE_FACTOR = 3.5D;
-        private const double SCALE_FACTOR = 5.0D;
+        private const double RotateFactor = 3.5D;
+        private const double ScaleFactor = 5.0D;
 
         private readonly SelectionViewModel _selection;
         private Model3DGroup _model;
@@ -36,8 +35,8 @@ namespace Stack.NET.ViewModel
             ListOfColors = ColorHelper.GetColors();
 
             for (var x = 0; x < 6; x++)
-            for (var z = 0; z < 6; z++)
-                Grid.Place(x, 0, z, Grid.Surface);
+                for (var z = 0; z < 6; z++)
+                    Grid.Place(x, 0, z, Grid.Surface);
 
             _selection = new SelectionViewModel(this, Grid, InitializeSelectionModel());
 
@@ -50,7 +49,7 @@ namespace Stack.NET.ViewModel
 
         public IEnumerable<DrawColor> ListOfColors { get; }
 
-        public SelectionViewModel Selection { get; set; }
+        public SelectionViewModel Selection => _selection;
 
         public RotateTransform3D Camera => new RotateTransform3D(
             new AxisAngleRotation3D(new Vector3D(0.0, 1.0, 0.0), _rotation),
@@ -75,6 +74,9 @@ namespace Stack.NET.ViewModel
             }
         }
 
+        public Model3DGroup SelectionModel => Selection.Model;
+        public Transform3D SelectionTransform => Selection.Transform;
+
         public DrawColor SelectedColor
         {
             get => ColorHelper.Convert(CubeColor);
@@ -97,7 +99,8 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation += ROTATE_FACTOR;
+                    _rotation += RotateFactor;
+                    RaisePropertyChangedEvent(nameof(SelectionModel));
                     RaisePropertyChangedEvent(nameof(Camera));
                 });
             }
@@ -109,7 +112,8 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation -= ROTATE_FACTOR;
+                    _rotation -= RotateFactor;
+                    RaisePropertyChangedEvent(nameof(SelectionModel));
                     RaisePropertyChangedEvent(nameof(Camera));
                 });
             }
@@ -139,7 +143,7 @@ namespace Stack.NET.ViewModel
 
         public Model3DGroup InitializeSelectionModel()
         {
-            var cubeBuilder = new CubeBuilder(SCALE_FACTOR + 0.01D);
+            var cubeBuilder = new CubeBuilder(ScaleFactor + 0.01D);
             var cube = cubeBuilder.Create(Colors.Red, 0, 0, 0);
 
             var group = new Model3DGroup();
@@ -150,7 +154,7 @@ namespace Stack.NET.ViewModel
 
         private void Render()
         {
-            var cubeBuilder = new CubeBuilder(SCALE_FACTOR);
+            var cubeBuilder = new CubeBuilder(ScaleFactor);
             var grid = new Model3DGroup();
             for (var i = 0; i < Grid.Cubes.Count; i++)
             {
