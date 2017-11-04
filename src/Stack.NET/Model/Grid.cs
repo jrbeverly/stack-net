@@ -27,23 +27,48 @@ namespace Stack.NET.Model
         public double Length { get; set; }
         public double HalfLength => Length / 2.0D;
 
-        public void Place(int x, int y, int z, Color color)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x">The x-component of the index.</param>
+        /// <param name="y">The y-component of the index.</param>
+        /// <param name="z">The z-component of the index.</param>
+        /// <param name="cube">The cube color.</param>
+        public void Place(int x, int y, int z, Cube cube)
         {
             var point = new Index3D(x, y, z);
-
-            if (!_cubes.TryGetValue(point, out var cube))
-            {
-                cube = new Cube(new Index3D(x, y, z), color);
-                _cubes.Add(point, cube);
-            }
-
-            cube.Surface = color;
+            _cubes.Add(point, cube);
         }
 
+        /// <summary>
+        /// Places a cube at the specified position.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="cube">The cube.</param>
+        public void Place(Index3D position, Cube cube)
+        {
+            _cubes.Add(position, cube);
+        }
+
+        /// <summary>
+        /// Destroys a cube at the specified position.
+        /// </summary>
+        /// <param name="x">The x-component of the index.</param>
+        /// <param name="y">The y-component of the index.</param>
+        /// <param name="z">The z-component of the index.</param>
         public void Destroy(int x, int y, int z)
         {
             var point = new Index3D(x, y, z);
             _cubes.Remove(point);
+        }
+
+        /// <summary>
+        /// Destroys a cube at the specified position.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        public void Destroy(Index3D position)
+        {
+            _cubes.Remove(position);
         }
 
         public void Range(out Index3D min, out Index3D max)

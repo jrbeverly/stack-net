@@ -10,15 +10,11 @@ namespace Stack.NET.ViewModel
 {
     internal sealed class SelectionViewModel
     {
-        private readonly ObservableObject _object;
-
-        public SelectionViewModel(ObservableObject observable, Grid grid, Model3DGroup model)
+        public SelectionViewModel(Grid grid, Model3DGroup model)
         {
-            _object = observable;
             Grid = grid;
             Model = model;
-
-            Point = new Index3D(0, 0, 0);
+            
             SelectedColor = Colors.Black;
         }
 
@@ -115,7 +111,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(Point.X, Point.Y, Point.Z, SelectedColor);
+                    Grid.Place(Point, new Cube(Point, SelectedColor));
                     OnPlace?.Invoke();
                 });
             }

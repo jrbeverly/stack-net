@@ -33,9 +33,9 @@ namespace Stack.NET.ViewModel
 
             for (var x = 0; x < 6; x++)
                 for (var z = 0; z < 6; z++)
-                    Grid.Place(x, 0, z, Grid.Surface);
+                    Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
 
-            _selection = new SelectionViewModel(this, Grid, InitializeSelectionModel());
+            _selection = new SelectionViewModel(Grid, InitializeSelectionModel());
 
             Render();
         }
@@ -122,8 +122,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(_selection.Point.X, _selection.Point.Y, _selection.Point.Z,
-                        ColorHelper.Convert(SelectedColor));
+                    Grid.Place(_selection.Point, new Cube(_selection.Point, ColorHelper.Convert(SelectedColor)));
                     RaisePropertyChangedEvent(nameof(Model));
                     RaisePropertyChangedEvent(nameof(Selection));
                 });
