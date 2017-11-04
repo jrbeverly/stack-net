@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Documents;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
 using Stack.NET.Utility;
 
 namespace Stack.NET.Model
@@ -14,94 +12,103 @@ namespace Stack.NET.Model
     /// </summary>
     public sealed class Grid
     {
-        //TODO: Index3D as Strongly Typed Position
         private readonly Dictionary<Position, Cube> _cubes;
 
+        /// <summary>
+        /// Initializes a new instance of a <see cref="Grid"/>.
+        /// </summary>
         public Grid()
         {
             _cubes = new Dictionary<Position, Cube>();
+            Dimensions = new Dimensions();
         }
 
-        //TODO: Remove this from the model
-        public Color Surface { get; set; }
-
+        /// <summary>
+        /// Gets a collection containing the cubes of the grid.
+        /// </summary>
         public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
 
-        public double Segment { get; set; }
-        public double Length { get; set; }
-        public double HalfLength => Length / 2.0D;
+        /// <summary>
+        /// Gets a collection containing the cube positions.
+        /// </summary>
+        public IReadOnlyCollection<Position> Positions => _cubes.Keys;
 
+        public IReadOnlyDictionary<Position, Cube> Values => _cubes;
+
+        public Dimensions Dimensions { get; }
+        
+        /// <summary>
+        /// Places a cube with the specified color.
+        /// </summary>
+        /// <param name="x">The x-component of the index.</param>
+        /// <param name="y">The y-component of the index.</param>
+        /// <param name="z">The z-component of the index.</param>
+        /// <param name="color">The cube color.</param>
         public void Place(int x, int y, int z, Color color)
         {
             var point = new Position(x, y, z);
 
             if (!_cubes.TryGetValue(point, out var cube))
             {
-                cube = new Cube(new Position(x, y, z), color);
+                cube = new Cube(color);
                 _cubes.Add(point, cube);
             }
 
             cube.Surface = color;
         }
 
-        public void Destroy(int x, int y, int z)
+        /// <summary>
+        /// Places a cube at the specified position.
+        /// </summary>
+        /// <param name="x">The x-component of the index.</param>
+        /// <param name="y">The y-component of the index.</param>
+        /// <param name="z">The z-component of the index.</param>
+        /// <param name="cube">The cube.</param>
+        public void Place(int x, int y, int z, Cube cube)
         {
-            var point = new Position(x, y, z);
-            _cubes.Remove(point);
+            Place(new Position(x, y, z), cube);
         }
 
-        public void Range(out Position min, out Position max)
+        /// <summary>
+        /// Places a cube at the specified position.
+        /// </summary>
+        /// <param name="position">The position of the cube.</param>
+        /// <param name="cube">The cube.</param>
+        public void Place(Position position, Cube cube)
         {
-            var vmax = new Position(int.MinValue, int.MinValue, int.MinValue);
-            var vmin = new Position(int.MaxValue, int.MaxValue, int.MaxValue);
+            _cubes[position] = cube;
+        }
 
-            foreach (var index in Cubes)
-            {
-                vmin = Index3D.Min(vmin, index.Position);
-                vmax = Index3D.Max(vmax, index.Position);
-            }
+        /// <summary>
+        /// Removes the cube at the specified position.
+        /// </summary>
+        /// <param name="x">The x-component of the index.</param>
+        /// <param name="y">The y-component of the index.</param>
+        /// <param name="z">The z-component of the index.</param>
+        public void Destroy(int x, int y, int z)
+        {
+            Destroy(new Position(x, y, z));
+        }
 
-            min = vmin;
-            max = vmax;
+        /// <summary>
+        /// Removes the cube at the specified position.
+        /// </summary>
+        /// <param name="position">The position of the cube.</param>
+        public void Destroy(Position position)
+        {
+            _cubes.Remove(position);
         }
 
         public Position Maximum()
         {
             var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
-            return Cubes.Aggregate(vmax, (current, index) => Index3D.Max(current, index.Position));
+            return _cubes.Keys.Aggregate(vmax, Index3D.Max);
         }
 
         public Position Minimum()
         {
             var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
-            return Cubes.Aggregate(vmin, (current, index) => Index3D.Min(current, index.Position));
-        }
-
-        public Point3D Center()
-        {
-            Range(out var min, out var max);
-
-            var center = new Point3D(
-                MathHelper.Center(min.X, max.X + 1),
-                MathHelper.Center(min.Y, max.Y + 1),
-                MathHelper.Center(min.Z, max.Z + 1));
-
-            return new Point3D
-            {
-                X = center.X * Segment,
-                Y = center.Y * Segment,
-                Z = center.Z * Segment
-            };
-        }
-
-        public Point3D Position(Index3D position)
-        {
-            return new Point3D
-            {
-                X = position.X * Segment + (Segment - Length) / 2.0D,
-                Y = position.Y * Segment,
-                Z = position.Z * Segment + (Segment - Length) / 2.0D
-            };
+            return _cubes.Keys.Aggregate(vmin, Index3D.Min);
         }
     }
 }
