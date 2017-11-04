@@ -1,20 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Utility;
 
 namespace Stack.NET.Model
 {
-    public sealed class Grid3D
+    using Position = Index3D;
+
+    /// <summary>
+    /// Represents a loosely structured 3-dimensional grid.
+    /// </summary>
+    public sealed class Grid
     {
-        public Grid3D()
+        //TODO: Index3D as Strongly Typed Position
+        private readonly Dictionary<Position, Cube> _cubes;
+
+        public Grid()
         {
-            Cubes = new List<Cube>();
+            _cubes = new Dictionary<Position, Cube>();
         }
 
+        //TODO: Remove this from the model
         public Color Surface { get; set; }
-        public List<Cube> Cubes { get; set; }
+
+        public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
 
         public double Segment { get; set; }
         public double Length { get; set; }
@@ -22,33 +33,27 @@ namespace Stack.NET.Model
 
         public void Place(int x, int y, int z, Color color)
         {
-            var point = new Index3D(x, y, z);
-            var index = Cubes.FindIndex(p => p.Position.Equals(point));
+            var point = new Position(x, y, z);
 
-            if (index == -1)
+            if (!_cubes.TryGetValue(point, out var cube))
             {
-                var cube = new Cube(new Index3D(x, y, z), color);
-                Cubes.Add(cube);
+                cube = new Cube(new Position(x, y, z), color);
+                _cubes.Add(point, cube);
             }
-            else
-            {
-                Cubes[index].Surface = color;
-            }
+
+            cube.Surface = color;
         }
 
         public void Destroy(int x, int y, int z)
         {
-            var point = new Index3D(x, y, z);
-            var index = Cubes.FindIndex(p => p.Position.Equals(point));
-
-            if (index != -1)
-                Cubes.RemoveAt(index);
+            var point = new Position(x, y, z);
+            _cubes.Remove(point);
         }
 
-        public void Range(out Index3D min, out Index3D max)
+        public void Range(out Position min, out Position max)
         {
-            var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
-            var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
+            var vmax = new Position(int.MinValue, int.MinValue, int.MinValue);
+            var vmin = new Position(int.MaxValue, int.MaxValue, int.MaxValue);
 
             foreach (var index in Cubes)
             {
@@ -60,13 +65,13 @@ namespace Stack.NET.Model
             max = vmax;
         }
 
-        public Index3D Maximum()
+        public Position Maximum()
         {
             var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
             return Cubes.Aggregate(vmax, (current, index) => Index3D.Max(current, index.Position));
         }
 
-        public Index3D Minimum()
+        public Position Minimum()
         {
             var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
             return Cubes.Aggregate(vmin, (current, index) => Index3D.Min(current, index.Position));

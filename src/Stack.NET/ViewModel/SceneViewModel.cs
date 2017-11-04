@@ -24,7 +24,7 @@ namespace Stack.NET.ViewModel
 
         public SceneViewModel()
         {
-            Grid = new Grid3D
+            Grid = new Grid
             {
                 Length = 5.0D,
                 Segment = 6.0D,
@@ -43,7 +43,7 @@ namespace Stack.NET.ViewModel
             Render();
         }
 
-        public Grid3D Grid { get; }
+        public Grid Grid { get; }
 
         public Point3D Position { get; private set; }
 
@@ -156,10 +156,8 @@ namespace Stack.NET.ViewModel
         {
             var cubeBuilder = new CubeBuilder(ScaleFactor);
             var grid = new Model3DGroup();
-            for (var i = 0; i < Grid.Cubes.Count; i++)
+            foreach (var cube in Grid.Cubes)
             {
-                var cube = Grid.Cubes[i];
-
                 var model = cubeBuilder.Create(cube.Surface);
                 var position = Grid.Position(cube.Position);
                 model.Transform = new TranslateTransform3D(position.X, position.Y, position.Z);

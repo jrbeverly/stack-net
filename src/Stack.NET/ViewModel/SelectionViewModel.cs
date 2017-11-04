@@ -12,7 +12,7 @@ namespace Stack.NET.ViewModel
     {
         private readonly ObservableObject _object;
 
-        public SelectionViewModel(ObservableObject observable, Grid3D grid, Model3DGroup model)
+        public SelectionViewModel(ObservableObject observable, Grid grid, Model3DGroup model)
         {
             _object = observable;
             Grid = grid;
@@ -35,7 +35,7 @@ namespace Stack.NET.ViewModel
         public Color SelectedColor { get; set; }
         public Index3D Point { get; set; }
         public Model3DGroup Model { get; }
-        public Grid3D Grid { get; }
+        public Grid Grid { get; }
 
         public ICommand MoveForward
         {

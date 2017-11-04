@@ -6,11 +6,11 @@ namespace Stack.NET.ViewModel
 {
     public sealed class GridViewModel : ObservableObject
     {
-        private readonly Grid3D _grid;
+        private readonly Grid _grid;
         private Model3DGroup _model;
         private double _rotation;
 
-        public GridViewModel(Grid3D grid, Model3DGroup model)
+        public GridViewModel(Grid grid, Model3DGroup model)
         {
             _grid = grid;
             _model = model;
@@ -44,10 +44,8 @@ namespace Stack.NET.ViewModel
         {
             var cubeBuilder = new CubeBuilder(Scale);
             var grid = new Model3DGroup();
-            for (var i = 0; i < _grid.Cubes.Count; i++)
+            foreach (var cube in _grid.Cubes)
             {
-                var cube = _grid.Cubes[i];
-
                 var cubeGeometry = cubeBuilder.Create(cube.Surface);
                 var position = _grid.Position(cube.Position);
                 cubeGeometry.Transform = new TranslateTransform3D(position.X, position.Y, position.Z);

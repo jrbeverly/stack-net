@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Geometry\ICubeBuilder.cs" />
+    <Compile Include="Geometry\IGeometryBuilder.cs" />
     <Compile Include="Utility\ColorHelper.cs" />
     <Compile Include="Utility\Index3D.cs" />
     <Compile Include="Utility\MathHelper.cs" />
@@ -100,7 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geometry\CubeBuilder.cs" />
-    <Compile Include="Geometry\ModelBuilder.cs" />
+    <Compile Include="Geometry\GeometryBuilder.cs" />
     <Compile Include="Converters\ColorToSolidBrushConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -109,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Cube.cs" />
-    <Compile Include="Model\Grid3D.cs" />
+    <Compile Include="Model\Grid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
