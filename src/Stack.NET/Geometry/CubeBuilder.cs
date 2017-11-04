@@ -5,7 +5,7 @@ using Stack.NET.Model;
 
 namespace Stack.NET.Geometry
 {
-    /// <summary>A builder to construct a <see cref="Cube"/>.</summary>
+    /// <summary>A builder to construct a <see cref="Cube" />.</summary>
     public sealed class CubeBuilder : ICubeBuilder
     {
         /// <summary>The default width of the cube.</summary>
@@ -26,7 +26,7 @@ namespace Stack.NET.Geometry
         /// <summary></summary>
         /// <param name="color">The <see cref="Color" /> of the model.</param>
         /// <returns>The 3d geometry mesh.</returns>
-        /// <summary>Constructs a <see cref="GeometryModel3D" /> Cube from the underlying <see cref="ModelBuilder" />.</summary>
+        /// <summary>Constructs a <see cref="GeometryModel3D" /> Cube from the underlying <see cref="GeometryBuilder" />.</summary>
         /// <param name="x">The bottom-left x-coordinate of the cube.</param>
         /// <param name="y">The bottom-left y-coordinate of the cube.</param>
         /// <param name="z">The bottom-left z-coordinate of the cube.</param>
@@ -46,7 +46,7 @@ namespace Stack.NET.Geometry
                 new Point3D(x, space + y, space + z)
             };
 
-            var builder = new ModelBuilder();
+            var builder = new GeometryBuilder();
             builder.AddTriangle(points[3], points[2], points[6]);
             builder.AddTriangle(points[3], points[6], points[7]);
             builder.AddTriangle(points[2], points[1], points[5]);
