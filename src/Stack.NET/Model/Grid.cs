@@ -17,18 +17,18 @@ namespace Stack.NET.Model
         {
             _cubes = new Dictionary<Index3D, Cube>();
         }
-
-        //TODO: Remove this from the model
+        
         public Color Surface { get; set; }
 
         public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
+        public IReadOnlyCollection<Index3D> Positions => _cubes.Keys;
 
         public double Segment { get; set; }
         public double Length { get; set; }
         public double HalfLength => Length / 2.0D;
 
         /// <summary>
-        /// 
+        /// Places a cube at the specified position.
         /// </summary>
         /// <param name="x">The x-component of the index.</param>
         /// <param name="y">The y-component of the index.</param>
@@ -89,13 +89,13 @@ namespace Stack.NET.Model
         public Index3D Maximum()
         {
             var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
-            return Cubes.Aggregate(vmax, (current, index) => Index3D.Max(current, index.Position));
+            return Positions.Aggregate(vmax, Index3D.Max);
         }
 
         public Index3D Minimum()
         {
             var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
-            return Cubes.Aggregate(vmin, (current, index) => Index3D.Min(current, index.Position));
+            return Positions.Aggregate(vmin, Index3D.Min);
         }
 
         public Point3D Center()
