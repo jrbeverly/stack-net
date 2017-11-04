@@ -3,10 +3,10 @@ using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Model;
 
-namespace Stack.NET.Construct
+namespace Stack.NET.Geometry
 {
     /// <summary>A builder to construct a <see cref="Cube"/>.</summary>
-    public sealed class CubeBuilder
+    public sealed class CubeBuilder : ICubeBuilder
     {
         /// <summary>The default width of the cube.</summary>
         public const int DefaultWidth = 1;

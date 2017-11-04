@@ -4,8 +4,8 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.Model
 {
-    /// <inheritdoc  />
-    /// <summary>A 3-dimensional cube with surface color.</summary>
+    /// <inheritdoc cref="IEquatable&lt;Cube&gt;" />
+    /// <summary>A 3-dimensional cube.</summary>
     public sealed class Cube : IEquatable<Cube>
     {
         /// <summary>Constructs a <see cref="Cube" /> at the specified position.</summary>
@@ -20,7 +20,7 @@ namespace Stack.NET.Model
         /// <summary>The surface color of the cube.</summary>
         public Color Surface { get; set; }
 
-        /// <summary>The grid position of the cube.</summary>
+        /// <summary>The position of the cube.</summary>
         public Index3D Position { get; }
 
         /// <inheritdoc />

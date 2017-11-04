@@ -1,5 +1,5 @@
 ﻿using System.Windows.Media.Media3D;
-using Stack.NET.Construct;
+using Stack.NET.Geometry;
 using Stack.NET.Model;
 
 namespace Stack.NET.ViewModel

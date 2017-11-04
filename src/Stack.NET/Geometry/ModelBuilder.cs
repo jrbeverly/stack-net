@@ -1,7 +1,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace Stack.NET.Construct
+namespace Stack.NET.Geometry
 {
     /// <summary>A builder to construct a <see cref="MeshGeometry3D" /> objects.</summary>
     public sealed class ModelBuilder

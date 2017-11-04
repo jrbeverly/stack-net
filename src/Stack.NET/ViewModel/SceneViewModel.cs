@@ -3,7 +3,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
-using Stack.NET.Construct;
+using Stack.NET.Geometry;
 using Stack.NET.Model;
 using Stack.NET.Utility;
 using Color = System.Drawing.Color;
