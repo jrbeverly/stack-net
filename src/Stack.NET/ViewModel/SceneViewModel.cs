@@ -15,9 +15,6 @@ namespace Stack.NET.ViewModel
 
     internal sealed class SceneViewModel : ObservableObject
     {
-        private const double RotateFactor = 3.5D;
-        private const double ScaleFactor = 5.0D;
-
         private readonly SelectionViewModel _selection;
         private Model3DGroup _model;
         private double _rotation;
@@ -99,7 +96,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation += RotateFactor;
+                    _rotation += MovementConstants.RotateFactor;
                     RaisePropertyChangedEvent(nameof(SelectionModel));
                     RaisePropertyChangedEvent(nameof(Camera));
                 });
@@ -112,7 +109,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation -= RotateFactor;
+                    _rotation -= MovementConstants.RotateFactor;
                     RaisePropertyChangedEvent(nameof(SelectionModel));
                     RaisePropertyChangedEvent(nameof(Camera));
                 });
@@ -143,7 +140,7 @@ namespace Stack.NET.ViewModel
 
         public Model3DGroup InitializeSelectionModel()
         {
-            var cubeBuilder = new CubeBuilder(ScaleFactor + 0.01D);
+            var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor + 0.01D);
             var cube = cubeBuilder.Create(Colors.Red, 0, 0, 0);
 
             var group = new Model3DGroup();
@@ -154,7 +151,7 @@ namespace Stack.NET.ViewModel
 
         private void Render()
         {
-            var cubeBuilder = new CubeBuilder(ScaleFactor);
+            var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor);
             var grid = new Model3DGroup();
             foreach (var cube in Grid.Cubes)
             {
