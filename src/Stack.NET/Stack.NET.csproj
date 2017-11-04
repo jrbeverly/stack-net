@@ -84,10 +84,14 @@
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Geometry\ICubeBuilder.cs" />
     <Compile Include="Geometry\IGeometryBuilder.cs" />
+    <Compile Include="Model\CubeCollection.cs" />
+    <Compile Include="Model\Dimensions.cs" />
+    <Compile Include="Model\Padding.cs" />
+    <Compile Include="Model\Scene.cs" />
     <Compile Include="Utility\ColorHelper.cs" />
     <Compile Include="Utility\Index3D.cs" />
     <Compile Include="Utility\MathHelper.cs" />
-    <Compile Include="ViewModel\CubeViewModel.cs" />
+    <Compile Include="Utility\MovementConstants.cs" />
     <Compile Include="ViewModel\GridViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SceneViewModel.cs" />
