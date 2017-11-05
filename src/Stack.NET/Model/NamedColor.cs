@@ -2,7 +2,11 @@
 
 namespace Stack.NET.Model
 {
-    /// <summary>A collection of predefined colors.</summary>
+    /// <summary>Describes a predefined color.</summary>
+    /// <remarks>
+    /// The Windows Presentation Foundation (WPF) color names match the Microsoft .NET Framework version 1.0, Windows Forms, and Microsoft Internet Explorer color names. This representation is based on UNIX X11 named color values.
+    /// <seealso cref="http://msdn.microsoft.com/en-us/library/system.windows.media.colors(v=vs.110).aspx"/>
+    /// </remarks>
     public sealed class NamedColor
     {
         /// <summary>Constructs an instance of a system-defined color.</summary>

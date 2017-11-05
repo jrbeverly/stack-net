@@ -82,9 +82,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
+    <Compile Include="Controls\NamedColorBox.xaml.cs">
+      <DependentUpon>NamedColorBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Geometry\ICubeBuilder.cs" />
     <Compile Include="Geometry\IGeometryBuilder.cs" />
-    <Compile Include="Model\ColorCollection.cs" />
+    <Compile Include="Model\NamedColorCollection.cs" />
     <Compile Include="Utility\Index3D.cs" />
     <Compile Include="Utility\LinqExtensions.cs" />
     <Compile Include="Utility\MathHelper.cs" />
@@ -94,6 +97,10 @@
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SceneViewModel.cs" />
     <Compile Include="ViewModel\SelectionViewModel.cs" />
+    <Page Include="Controls\NamedColorBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

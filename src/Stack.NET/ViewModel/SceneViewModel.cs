@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
@@ -17,18 +16,20 @@ namespace Stack.NET.ViewModel
 
         public SceneViewModel()
         {
+            Colors = NamedColorCollection.GetNamedColors();
+            _defaultNamedColor = Colors.Random();
+
+
+
             Grid = new Grid
             {
                 Length = 5.0D,
                 Segment = 6.0D,
-                Surface = Colors.CornflowerBlue
+                Surface = System.Windows.Media.Colors.CornflowerBlue
             };
 
             Position = new Point3D(50, 50, 50);
-            ListOfColors = ColorCollection.GetNamedColors();
-            _defaultNamedColor = ListOfColors.Random();
-
-            for (var x = 0; x < 6; x++)
+           for (var x = 0; x < 6; x++)
             for (var z = 0; z < 6; z++)
                 Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
 
@@ -37,11 +38,28 @@ namespace Stack.NET.ViewModel
             Render();
         }
 
+        /// <summary>
+        /// A collection of named colors.
+        /// </summary>
+        public NamedColorCollection Colors { get; }
+
+        /// <summary>
+        /// The currently selected color.
+        /// </summary>
+        public NamedColor SelectedColor
+        {
+            get => _defaultNamedColor;
+            set
+            {
+                _defaultNamedColor = value;
+                Grid.Surface = _defaultNamedColor.Color;
+                RaisePropertyChangedEvent(nameof(Model));
+            }
+        }
+
         public Grid Grid { get; }
 
         public Point3D Position { get; private set; }
-
-        public ColorCollection ListOfColors { get; }
 
         public SelectionViewModel Selection { get; }
 
@@ -71,16 +89,6 @@ namespace Stack.NET.ViewModel
         public Model3DGroup SelectionModel => Selection.Model;
         public Transform3D SelectionTransform => Selection.Transform;
 
-        public NamedColor SelectedColor
-        {
-            get => _defaultNamedColor;
-            set
-            {
-                _defaultNamedColor = value;
-                Grid.Surface = _defaultNamedColor.Color;
-                RaisePropertyChangedEvent(nameof(Model));
-            }
-        }
 
         public ICommand RotateLeft
         {
@@ -132,7 +140,7 @@ namespace Stack.NET.ViewModel
         public Model3DGroup InitializeSelectionModel()
         {
             var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor + 0.01D);
-            var cube = cubeBuilder.Create(Colors.Red, 0, 0, 0);
+            var cube = cubeBuilder.Create(System.Windows.Media.Colors.Red, 0, 0, 0);
 
             var group = new Model3DGroup();
             group.Children.Add(cube);
