@@ -49,8 +49,7 @@
             </ModelVisual3D>
             <ModelVisual3D x:Name="VmScene"
                            Content="{Binding Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <ModelVisual3D x:Name="VmSelection" Transform="{Binding SelectionTransform}"
-                           Content="{Binding SelectionModel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <controls:SelectionCube Content="{Binding SelectionModel}" Transform="{Binding SelectionTransform}" />
         </Viewport3D>
     </DockPanel>
 </Window>

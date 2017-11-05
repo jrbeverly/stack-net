@@ -85,6 +85,7 @@
     <Compile Include="Controls\NamedColorBox.xaml.cs">
       <DependentUpon>NamedColorBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SelectionCube.cs" />
     <Compile Include="Geometry\ICubeBuilder.cs" />
     <Compile Include="Geometry\IGeometryBuilder.cs" />
     <Compile Include="Model\NamedColorCollection.cs" />
