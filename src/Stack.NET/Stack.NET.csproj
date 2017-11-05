@@ -94,7 +94,6 @@
     <Compile Include="Utility\MathHelper.cs" />
     <Compile Include="Utility\MovementConstants.cs" />
     <Compile Include="Model\NamedColor.cs" />
-    <Compile Include="ViewModel\GridViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SceneViewModel.cs" />
     <Compile Include="ViewModel\SelectionViewModel.cs" />
