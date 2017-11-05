@@ -4,7 +4,7 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.Model
 {
-    /// <inheritdoc cref="IEquatable&lt;Cube&gt;" />
+    /// <inheritdoc cref="IEquatable{T}" />
     /// <summary>A 3-dimensional cube.</summary>
     public sealed class Cube : IEquatable<Cube>
     {

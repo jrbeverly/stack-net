@@ -38,7 +38,8 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Border BorderThickness="0" Height="20" Width="20" Background="{Binding Color, Converter={StaticResource ColorToBrush}}" />
+                                <Border BorderThickness="0" Height="20" Width="20"
+                                        Background="{Binding Color, Converter={StaticResource ColorToBrush}}" />
                                 <TextBlock Margin="10,0,0,0" Text="{Binding Name, Mode=OneTime}" />
                             </StackPanel>
                         </DataTemplate>

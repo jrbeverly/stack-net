@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -12,10 +11,9 @@ namespace Stack.NET.ViewModel
 {
     internal sealed class SceneViewModel : ObservableObject
     {
-        private readonly SelectionViewModel _selection;
+        private NamedColor _defaultNamedColor;
         private Model3DGroup _model;
         private double _rotation;
-        private NamedColor _defaultNamedColor;
 
         public SceneViewModel()
         {
@@ -31,10 +29,10 @@ namespace Stack.NET.ViewModel
             _defaultNamedColor = ListOfColors.First(p => p.Name == "CornflowerBlue");
 
             for (var x = 0; x < 6; x++)
-                for (var z = 0; z < 6; z++)
-                    Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
+            for (var z = 0; z < 6; z++)
+                Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
 
-            _selection = new SelectionViewModel(Grid, InitializeSelectionModel());
+            Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
 
             Render();
         }
@@ -45,7 +43,7 @@ namespace Stack.NET.ViewModel
 
         public ColorCollection ListOfColors { get; }
 
-        public SelectionViewModel Selection => _selection;
+        public SelectionViewModel Selection { get; }
 
         public RotateTransform3D Camera => new RotateTransform3D(
             new AxisAngleRotation3D(new Vector3D(0.0, 1.0, 0.0), _rotation),
@@ -83,7 +81,7 @@ namespace Stack.NET.ViewModel
                 RaisePropertyChangedEvent(nameof(Model));
             }
         }
-        
+
         public ICommand RotateLeft
         {
             get
@@ -116,20 +114,20 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(_selection.Point, new Cube(_selection.Point, SelectedColor.Color));
+                    Grid.Place(Selection.Point, new Cube(Selection.Point, SelectedColor.Color));
                     RaisePropertyChangedEvent(nameof(Model));
                     RaisePropertyChangedEvent(nameof(Selection));
                 });
             }
         }
 
-        public ICommand MoveForward => _selection.MoveForward;
-        public ICommand MoveBackward => _selection.MoveBackward;
-        public ICommand MoveLeft => _selection.MoveLeft;
-        public ICommand MoveRight => _selection.MoveRight;
-        public ICommand MoveUp => _selection.MoveUp;
-        public ICommand MoveDown => _selection.MoveDown;
-        public ICommand DestroyCommand => _selection.DestroyCommand;
+        public ICommand MoveForward => Selection.MoveForward;
+        public ICommand MoveBackward => Selection.MoveBackward;
+        public ICommand MoveLeft => Selection.MoveLeft;
+        public ICommand MoveRight => Selection.MoveRight;
+        public ICommand MoveUp => Selection.MoveUp;
+        public ICommand MoveDown => Selection.MoveDown;
+        public ICommand DestroyCommand => Selection.DestroyCommand;
 
         public Model3DGroup InitializeSelectionModel()
         {

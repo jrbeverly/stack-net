@@ -6,9 +6,7 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.Model
 {
-    /// <summary>
-    /// Represents a loosely structured 3-dimensional grid.
-    /// </summary>
+    /// <summary>Represents a loosely structured 3-dimensional grid.</summary>
     public sealed class Grid
     {
         private readonly Dictionary<Index3D, Cube> _cubes;
@@ -17,7 +15,7 @@ namespace Stack.NET.Model
         {
             _cubes = new Dictionary<Index3D, Cube>();
         }
-        
+
         public Color Surface { get; set; }
 
         public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
@@ -27,9 +25,7 @@ namespace Stack.NET.Model
         public double Length { get; set; }
         public double HalfLength => Length / 2.0D;
 
-        /// <summary>
-        /// Places a cube at the specified position.
-        /// </summary>
+        /// <summary>Places a cube at the specified position.</summary>
         /// <param name="x">The x-component of the index.</param>
         /// <param name="y">The y-component of the index.</param>
         /// <param name="z">The z-component of the index.</param>
@@ -39,26 +35,18 @@ namespace Stack.NET.Model
             Place(new Index3D(x, y, z), cube);
         }
 
-        /// <summary>
-        /// Places a cube at the specified position.
-        /// </summary>
+        /// <summary>Places a cube at the specified position.</summary>
         /// <param name="position">The position.</param>
         /// <param name="cube">The cube.</param>
         public void Place(Index3D position, Cube cube)
         {
             if (_cubes.ContainsKey(position))
-            {
                 _cubes[position] = cube;
-            }
             else
-            {
                 _cubes.Add(position, cube);
-            }
         }
 
-        /// <summary>
-        /// Destroys a cube at the specified position.
-        /// </summary>
+        /// <summary>Destroys a cube at the specified position.</summary>
         /// <param name="x">The x-component of the index.</param>
         /// <param name="y">The y-component of the index.</param>
         /// <param name="z">The z-component of the index.</param>
@@ -68,9 +56,7 @@ namespace Stack.NET.Model
             _cubes.Remove(point);
         }
 
-        /// <summary>
-        /// Destroys a cube at the specified position.
-        /// </summary>
+        /// <summary>Destroys a cube at the specified position.</summary>
         /// <param name="position">The position.</param>
         public void Destroy(Index3D position)
         {
