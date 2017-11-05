@@ -51,7 +51,7 @@
             </ModelVisual3D>
             <ModelVisual3D x:Name="VmScene"
                            Content="{Binding Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <controls:SelectionCube Content="{Binding SelectionModel}" Transform="{Binding SelectionTransform}" />
+            <controls:SelectionCube Color="{Binding SelectedColor}" Content="{Binding SelectionModel}" Transform="{Binding SelectionTransform}" />
         </Viewport3D>
     </DockPanel>
 </Window>

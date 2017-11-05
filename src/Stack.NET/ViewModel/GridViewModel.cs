@@ -1,6 +1,9 @@
-﻿using System.Windows.Media.Media3D;
+﻿using System.Windows.Input;
+using System.Windows.Media.Media3D;
+using Stack.NET.Commands;
 using Stack.NET.Geometry;
 using Stack.NET.Model;
+using Stack.NET.Utility;
 
 namespace Stack.NET.ViewModel
 {
@@ -39,6 +42,30 @@ namespace Stack.NET.ViewModel
 
         public RotateTransform3D Camera => new RotateTransform3D(
             new AxisAngleRotation3D(new Vector3D(0.0, 1.0, 0.0), _rotation), new Point3D());
+
+        public ICommand RotateLeft
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                {
+                    _rotation += MovementConstants.RotateFactor;
+                    RaisePropertyChangedEvent(nameof(Model));
+                });
+            }
+        }
+
+        public ICommand RotateRight
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                {
+                    _rotation -= MovementConstants.RotateFactor;
+                    RaisePropertyChangedEvent(nameof(Model));
+                });
+            }
+        }
 
         private Model3DGroup Render()
         {

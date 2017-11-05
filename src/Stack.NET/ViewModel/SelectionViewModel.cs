@@ -126,6 +126,34 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        public event Action OnForward, OnBackward, OnLeft, OnRight, OnUp, OnDown;
+        /// <summary>
+        /// Occurs when the forward command is executed.
+        /// </summary>
+        public event Action OnForward;
+
+        /// <summary>
+        /// Occurs when the backward command is executed.
+        /// </summary>
+        public event Action OnBackward;
+
+        /// <summary>
+        /// Occurs when the left command is executed.
+        /// </summary>
+        public event Action OnLeft;
+
+        /// <summary>
+        /// Occurs when the right command is executed.
+        /// </summary>
+        public event Action OnRight;
+
+        /// <summary>
+        /// Occurs when the up command is executed.
+        /// </summary>
+        public event Action OnUp;
+
+        /// <summary>
+        /// Occurs when the down command is executed.
+        /// </summary>
+        public event Action OnDown;
     }
 }

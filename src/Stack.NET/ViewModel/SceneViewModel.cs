@@ -17,8 +17,7 @@ namespace Stack.NET.ViewModel
         {
             Colors = NamedColorCollection.GetNamedColors();
             _defaultNamedColor = Colors.Random();
-
-
+            
             Grid = new Grid
             {
                 Length = 5.0D,
@@ -28,8 +27,12 @@ namespace Stack.NET.ViewModel
 
             Position = new Point3D(50, 50, 50);
             for (var x = 0; x < 6; x++)
-            for (var z = 0; z < 6; z++)
-                Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
+            {
+                for (var z = 0; z < 6; z++)
+                {
+                    Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
+                }
+            }
 
             Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
 
@@ -82,8 +85,7 @@ namespace Stack.NET.ViewModel
 
         public Model3DGroup SelectionModel => Selection.Model;
         public Transform3D SelectionTransform => Selection.Transform;
-
-
+        
         public ICommand RotateLeft
         {
             get
@@ -109,7 +111,14 @@ namespace Stack.NET.ViewModel
                 });
             }
         }
-
+        
+        public ICommand MoveForward => Selection.MoveForward;
+        public ICommand MoveBackward => Selection.MoveBackward;
+        public ICommand MoveLeft => Selection.MoveLeft;
+        public ICommand MoveRight => Selection.MoveRight;
+        public ICommand MoveUp => Selection.MoveUp;
+        public ICommand MoveDown => Selection.MoveDown;
+        
         public ICommand PlaceCommand
         {
             get
@@ -123,12 +132,6 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        public ICommand MoveForward => Selection.MoveForward;
-        public ICommand MoveBackward => Selection.MoveBackward;
-        public ICommand MoveLeft => Selection.MoveLeft;
-        public ICommand MoveRight => Selection.MoveRight;
-        public ICommand MoveUp => Selection.MoveUp;
-        public ICommand MoveDown => Selection.MoveDown;
         public ICommand DestroyCommand
         {
             get
