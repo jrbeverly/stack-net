@@ -6,7 +6,6 @@ namespace Stack.NET.Utility
     {
         public ColorCollection(IEnumerable<NamedColor> colors) : base(colors)
         {
-            
         }
     }
 }

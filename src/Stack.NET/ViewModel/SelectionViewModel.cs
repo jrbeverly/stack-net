@@ -14,7 +14,7 @@ namespace Stack.NET.ViewModel
         {
             Grid = grid;
             Model = model;
-            
+
             SelectedColor = Colors.Black;
         }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Stack.NET.Utility
+﻿namespace Stack.NET.Utility
 {
     public static class MovementConstants
     {

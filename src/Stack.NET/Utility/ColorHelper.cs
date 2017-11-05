@@ -14,11 +14,7 @@ namespace Stack.NET.Utility
                     Value = p.GetValue(null)
                 })
                 .Where(p => p.Value is Color)
-                .Select(p => new NamedColor
-                {
-                    Name = p.Name,
-                    Color = (Color) p.Value
-                }));
+                .Select(p => new NamedColor(p.Name, (Color) p.Value)));
         }
     }
 }

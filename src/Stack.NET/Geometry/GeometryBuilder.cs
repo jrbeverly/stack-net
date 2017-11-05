@@ -13,7 +13,7 @@ namespace Stack.NET.Geometry
         {
             _mesh = new MeshGeometry3D();
         }
-        
+
         /// <inheritdoc />
         public void AddTriangle(Point3D p0, Point3D p1, Point3D p2)
         {
