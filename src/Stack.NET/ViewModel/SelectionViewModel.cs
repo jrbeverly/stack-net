@@ -126,32 +126,6 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        //TODO: Move out to higher level
-        public ICommand PlaceCommand
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Grid.Place(Point, new Cube(Point, SelectedColor));
-                    OnPlace?.Invoke();
-                });
-            }
-        }
-
-        //TODO: Move out to higher level
-        public ICommand DestroyCommand
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Grid.Destroy(Point.X, Point.Y, Point.Z);
-                    OnDestroy?.Invoke();
-                });
-            }
-        }
-
-        public event Action OnForward, OnBackward, OnLeft, OnRight, OnUp, OnDown, OnPlace, OnDestroy;
+        public event Action OnForward, OnBackward, OnLeft, OnRight, OnUp, OnDown;
     }
 }

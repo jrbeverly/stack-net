@@ -129,7 +129,18 @@ namespace Stack.NET.ViewModel
         public ICommand MoveRight => Selection.MoveRight;
         public ICommand MoveUp => Selection.MoveUp;
         public ICommand MoveDown => Selection.MoveDown;
-        public ICommand DestroyCommand => Selection.DestroyCommand;
+        public ICommand DestroyCommand
+        {
+            get
+            {
+                return new ActionCommand(() =>
+                {
+                    Grid.Destroy(Selection.Point);
+                    RaisePropertyChangedEvent(nameof(Model));
+                    RaisePropertyChangedEvent(nameof(Selection));
+                });
+            }
+        }
 
         public Model3DGroup InitializeSelectionModel()
         {
