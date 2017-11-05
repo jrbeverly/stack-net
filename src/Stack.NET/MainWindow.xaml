@@ -1,8 +1,8 @@
 ﻿<Window x:Class="Stack.NET.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:converters="clr-namespace:Stack.NET.Converters"
         xmlns:viewModel="clr-namespace:Stack.NET.ViewModel"
+        xmlns:converters="clr-namespace:Stack.NET.Converters"
         Title="Stack.NET"
         Height="600"
         Width="800"
@@ -38,9 +38,8 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Border BorderThickness="0" Height="20" Width="20"
-                                        Background="{Binding Converter={StaticResource ColorToBrush}}" />
-                                <TextBlock Margin="10,0,0,0" Text="{Binding Name}" />
+                                <Border BorderThickness="0" Height="20" Width="20" Background="{Binding Color, Converter={StaticResource ColorToBrush}}" />
+                                <TextBlock Margin="10,0,0,0" Text="{Binding Name, Mode=OneTime}" />
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>

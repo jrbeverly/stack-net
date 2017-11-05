@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -6,18 +7,15 @@ using Stack.NET.Commands;
 using Stack.NET.Geometry;
 using Stack.NET.Model;
 using Stack.NET.Utility;
-using Color = System.Drawing.Color;
 
 namespace Stack.NET.ViewModel
 {
-    using DrawColor = Color;
-    using MediaColor = System.Windows.Media.Color;
-
     internal sealed class SceneViewModel : ObservableObject
     {
         private readonly SelectionViewModel _selection;
         private Model3DGroup _model;
         private double _rotation;
+        private NamedColor _defaultNamedColor;
 
         public SceneViewModel()
         {
@@ -29,7 +27,8 @@ namespace Stack.NET.ViewModel
             };
 
             Position = new Point3D(50, 50, 50);
-            ListOfColors = ColorHelper.GetColors();
+            ListOfColors = ColorHelper.GetNamedColors();
+            _defaultNamedColor = ListOfColors.First(p => p.Name == "CornflowerBlue");
 
             for (var x = 0; x < 6; x++)
                 for (var z = 0; z < 6; z++)
@@ -44,7 +43,7 @@ namespace Stack.NET.ViewModel
 
         public Point3D Position { get; private set; }
 
-        public IEnumerable<DrawColor> ListOfColors { get; }
+        public ColorCollection ListOfColors { get; }
 
         public SelectionViewModel Selection => _selection;
 
@@ -74,22 +73,17 @@ namespace Stack.NET.ViewModel
         public Model3DGroup SelectionModel => Selection.Model;
         public Transform3D SelectionTransform => Selection.Transform;
 
-        public DrawColor SelectedColor
+        public NamedColor SelectedColor
         {
-            get => ColorHelper.Convert(CubeColor);
+            get => _defaultNamedColor;
             set
             {
-                CubeColor = ColorHelper.Convert(value);
+                _defaultNamedColor = value;
+                Grid.Surface = _defaultNamedColor.Color;
                 RaisePropertyChangedEvent(nameof(Model));
             }
         }
-
-        public MediaColor CubeColor
-        {
-            get => Grid.Surface;
-            set => Grid.Surface = value;
-        }
-
+        
         public ICommand RotateLeft
         {
             get
@@ -122,7 +116,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(_selection.Point, new Cube(_selection.Point, ColorHelper.Convert(SelectedColor)));
+                    Grid.Place(_selection.Point, new Cube(_selection.Point, SelectedColor.Color));
                     RaisePropertyChangedEvent(nameof(Model));
                     RaisePropertyChangedEvent(nameof(Selection));
                 });

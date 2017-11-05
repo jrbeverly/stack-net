@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Stack.NET.Utility;
-using Color = System.Drawing.Color;
 
 namespace Stack.NET.Converters
 {
@@ -22,7 +21,18 @@ namespace Stack.NET.Converters
         /// <returns>A converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new SolidColorBrush(ColorHelper.Convert((Color) value));
+            if (null == value)
+            {
+                return null;
+            }
+            
+            if (value is Color color)
+            {
+                return new SolidColorBrush(color);
+            }
+
+            var type = value.GetType();
+            throw new InvalidOperationException("Unsupported type [" + type.Name + "]");
         }
 
         /// <summary>Attempts to convert the specified value back.</summary>

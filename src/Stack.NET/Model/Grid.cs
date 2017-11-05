@@ -36,8 +36,7 @@ namespace Stack.NET.Model
         /// <param name="cube">The cube color.</param>
         public void Place(int x, int y, int z, Cube cube)
         {
-            var point = new Index3D(x, y, z);
-            _cubes.Add(point, cube);
+            Place(new Index3D(x, y, z), cube);
         }
 
         /// <summary>
@@ -47,7 +46,14 @@ namespace Stack.NET.Model
         /// <param name="cube">The cube.</param>
         public void Place(Index3D position, Cube cube)
         {
-            _cubes.Add(position, cube);
+            if (_cubes.ContainsKey(position))
+            {
+                _cubes[position] = cube;
+            }
+            else
+            {
+                _cubes.Add(position, cube);
+            }
         }
 
         /// <summary>
