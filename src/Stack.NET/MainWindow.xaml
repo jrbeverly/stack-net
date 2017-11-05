@@ -35,7 +35,9 @@
         </StackPanel>
         <Viewport3D Name="MainViewport" ClipToBounds="True" DockPanel.Dock="Top">
             <Viewport3D.Camera>
-                <PerspectiveCamera x:Name="MCamera" Position="{Binding Position}" Transform="{Binding Camera}"
+                <PerspectiveCamera x:Name="MCamera" 
+                                   Position="{Binding Position}" 
+                                   Transform="{Binding Camera}"
                                    LookDirection="-1,-1,-1"
                                    FarPlaneDistance="1000"
                                    UpDirection="0,1,0"

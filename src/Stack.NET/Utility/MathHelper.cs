@@ -33,7 +33,7 @@ namespace Stack.NET.Utility
         /// </code>
         /// Passing amount a value of 0 will cause value1 to be returned, a value of 1 will cause value2 to be returned.
         /// </remarks>
-        /// <seealso cref="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.mathhelper.lerp.aspx" />
+        /// <seealso cref="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.mathhelper.lerp.aspx" />
         public static double Center(int value1, int value2)
         {
             return value1 + (Math.Abs(value2) + (double) Math.Abs(value1)) / 2.0D;
