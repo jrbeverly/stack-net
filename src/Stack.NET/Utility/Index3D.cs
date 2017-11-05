@@ -6,6 +6,36 @@ namespace Stack.NET.Utility
     /// <summary>Defines a index with three components.</summary>
     public struct Index3D : IEquatable<Index3D>
     {
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating up (0, 1, 0).
+        /// </summary>
+        public static readonly Index3D Up = new Index3D(0, 1, 0);
+
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating down (0, −1, 0).
+        /// </summary>
+        public static readonly Index3D Down = new Index3D(0, -1, 0);
+
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating forward (0, 0, −1).
+        /// </summary>
+        public static readonly Index3D Forward = new Index3D(0, 0, -1);
+
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating backward (0, 0, 1).
+        /// </summary>
+        public static readonly Index3D Backward = new Index3D(0, 0, 1);
+
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating left (−1, 0, 0).
+        /// </summary>
+        public static readonly Index3D Left = new Index3D(-1, 0, 0);
+
+        /// <summary>
+        /// Returns a unit <see cref="Index3D"/> designating right (1, 0, 0).
+        /// </summary>
+        public static readonly Index3D Right = new Index3D(1, 0, 0);
+
         /// <summary>Gets the x-component of the index.</summary>
         public readonly int X;
 
@@ -16,10 +46,18 @@ namespace Stack.NET.Utility
         public readonly int Z;
 
         /// <summary>Initializes a new instance of <see cref="Index3D" />.</summary>
+        public Index3D(int value)
+        {
+            X = value;
+            Y = value;
+            Z = value;
+        }
+
+        /// <summary>Initializes a new instance of <see cref="Index3D" />.</summary>
         /// <param name="x">Initial value for the x-component of the index.</param>
         /// <param name="y">Initial value for the y-component of the index.</param>
         /// <param name="z">Initial value for the z-component of the index.</param>
-        public Index3D(int x = 0, int y = 0, int z = 0)
+        public Index3D(int x, int y, int z)
         {
             X = x;
             Y = y;
