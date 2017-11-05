@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
 using Stack.NET.Geometry;
@@ -20,7 +19,6 @@ namespace Stack.NET.ViewModel
             _defaultNamedColor = Colors.Random();
 
 
-
             Grid = new Grid
             {
                 Length = 5.0D,
@@ -29,7 +27,7 @@ namespace Stack.NET.ViewModel
             };
 
             Position = new Point3D(50, 50, 50);
-           for (var x = 0; x < 6; x++)
+            for (var x = 0; x < 6; x++)
             for (var z = 0; z < 6; z++)
                 Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
 
@@ -38,14 +36,10 @@ namespace Stack.NET.ViewModel
             Render();
         }
 
-        /// <summary>
-        /// A collection of named colors.
-        /// </summary>
+        /// <summary>A collection of named colors.</summary>
         public NamedColorCollection Colors { get; }
 
-        /// <summary>
-        /// The currently selected color.
-        /// </summary>
+        /// <summary>The currently selected color.</summary>
         public NamedColor SelectedColor
         {
             get => _defaultNamedColor;

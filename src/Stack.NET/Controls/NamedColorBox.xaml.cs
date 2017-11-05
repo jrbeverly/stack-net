@@ -26,15 +26,16 @@ namespace Stack.NET.Controls
         }
 
         /// <summary>A collection of named colors.</summary>
-        public NamedColorCollection Colors {
-            get => (NamedColorCollection)GetValue(ColorsProperty);
+        public NamedColorCollection Colors
+        {
+            get => (NamedColorCollection) GetValue(ColorsProperty);
             set => SetValue(ColorsProperty, value);
         }
 
         /// <summary>The currently selected color.</summary>
         public NamedColor SelectedColor
         {
-            get => (NamedColor)GetValue(SelectedColorProperty);
+            get => (NamedColor) GetValue(SelectedColorProperty);
             set => SetValue(SelectedColorProperty, value);
         }
     }

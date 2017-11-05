@@ -7,7 +7,8 @@ namespace Stack.NET.Converters
 {
     /// <inheritdoc />
     /// <summary>
-    /// An implementation of <see cref="T:System.Windows.Data.IValueConverter" /> that converts <see cref="T:System.Drawing.Color" /> values to <see cref="T:System.Windows.Media.Color" /> values.
+    /// An implementation of <see cref="T:System.Windows.Data.IValueConverter" /> that converts
+    /// <see cref="T:System.Drawing.Color" /> values to <see cref="T:System.Windows.Media.Color" /> values.
     /// </summary>
     public class ColorToSolidBrushConverter : IValueConverter
     {

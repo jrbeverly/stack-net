@@ -30,13 +30,13 @@
         <StackPanel Background="#FFEEEEEE" DockPanel.Dock="Bottom">
             <StackPanel Margin="5" FlowDirection="LeftToRight" VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                <controls:NamedColorBox Colors="{Binding Colors}" SelectedColor="{Binding SelectedColor}"/>
+                <controls:NamedColorBox Colors="{Binding Colors}" SelectedColor="{Binding SelectedColor}" />
             </StackPanel>
         </StackPanel>
         <Viewport3D Name="MainViewport" ClipToBounds="True" DockPanel.Dock="Top">
             <Viewport3D.Camera>
-                <PerspectiveCamera x:Name="MCamera" 
-                                   Position="{Binding Position}" 
+                <PerspectiveCamera x:Name="MCamera"
+                                   Position="{Binding Position}"
                                    Transform="{Binding Camera}"
                                    LookDirection="-1,-1,-1"
                                    FarPlaneDistance="1000"
