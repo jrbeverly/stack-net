@@ -25,8 +25,8 @@ namespace Stack.NET.ViewModel
             };
 
             Position = new Point3D(50, 50, 50);
-            ListOfColors = ColorHelper.GetNamedColors();
-            _defaultNamedColor = ListOfColors.First(p => p.Name == "CornflowerBlue");
+            ListOfColors = ColorCollection.GetNamedColors();
+            _defaultNamedColor = ListOfColors.Random();
 
             for (var x = 0; x < 6; x++)
             for (var z = 0; z < 6; z++)

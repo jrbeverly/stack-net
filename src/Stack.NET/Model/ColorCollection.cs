@@ -1,10 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 
-namespace Stack.NET.Utility
+namespace Stack.NET.Model
 {
-    internal static class ColorHelper
+    public sealed class ColorCollection : List<NamedColor>
     {
+        public ColorCollection(IEnumerable<NamedColor> colors) : base(colors)
+        {
+        }
+
         internal static ColorCollection GetNamedColors()
         {
             return new ColorCollection(typeof(Colors).GetProperties()

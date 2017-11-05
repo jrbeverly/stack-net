@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Stack.NET.Utility
+namespace Stack.NET.Model
 {
     /// <summary>A collection of predefined colors.</summary>
     public sealed class NamedColor

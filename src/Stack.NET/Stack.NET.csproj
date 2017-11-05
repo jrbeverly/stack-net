@@ -84,12 +84,12 @@
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Geometry\ICubeBuilder.cs" />
     <Compile Include="Geometry\IGeometryBuilder.cs" />
-    <Compile Include="Utility\ColorCollection.cs" />
-    <Compile Include="Utility\ColorHelper.cs" />
+    <Compile Include="Model\ColorCollection.cs" />
     <Compile Include="Utility\Index3D.cs" />
+    <Compile Include="Utility\LinqExtensions.cs" />
     <Compile Include="Utility\MathHelper.cs" />
     <Compile Include="Utility\MovementConstants.cs" />
-    <Compile Include="Utility\NamedColor.cs" />
+    <Compile Include="Model\NamedColor.cs" />
     <Compile Include="ViewModel\GridViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SceneViewModel.cs" />
