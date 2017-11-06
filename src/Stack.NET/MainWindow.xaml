@@ -13,12 +13,12 @@
         <viewModel:SceneViewModel />
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Command="{Binding MoveForward}" Key="W" />
-        <KeyBinding Command="{Binding MoveLeft}" Key="A" />
-        <KeyBinding Command="{Binding MoveBackward}" Key="S" />
-        <KeyBinding Command="{Binding MoveRight}" Key="D" />
-        <KeyBinding Command="{Binding MoveUp}" Key="Z" />
-        <KeyBinding Command="{Binding MoveDown}" Key="X" />
+        <KeyBinding Command="{Binding Selection.MoveForward}" Key="W" />
+        <KeyBinding Command="{Binding Selection.MoveLeft}" Key="A" />
+        <KeyBinding Command="{Binding Selection.MoveBackward}" Key="S" />
+        <KeyBinding Command="{Binding Selection.MoveRight}" Key="D" />
+        <KeyBinding Command="{Binding Selection.MoveUp}" Key="Z" />
+        <KeyBinding Command="{Binding Selection.MoveDown}" Key="X" />
 
         <KeyBinding Command="{Binding RotateLeft}" Key="Q" />
         <KeyBinding Command="{Binding RotateRight}" Key="E" />
@@ -49,8 +49,7 @@
                     <DirectionalLight Color="Transparent" Direction="-3,-4,-5" />
                 </ModelVisual3D.Content>
             </ModelVisual3D>
-            <ModelVisual3D x:Name="VmScene"
-                           Content="{Binding Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ModelVisual3D x:Name="VmScene" Content="{Binding Model, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             <controls:SelectionCube Color="{Binding SelectedColor}" Content="{Binding SelectionModel}" Transform="{Binding SelectionTransform}" />
         </Viewport3D>
     </DockPanel>

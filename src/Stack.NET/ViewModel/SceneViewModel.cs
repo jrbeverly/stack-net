@@ -9,11 +9,8 @@ namespace Stack.NET.ViewModel
 {
     internal sealed class SceneViewModel : ObservableObject
     {
-        private static readonly Vector3D Up = new Vector3D(0.0, 1.0, 0.0);
-
         private NamedColor _selectedColor;
         private Model3DGroup _model;
-        private double _rotation;
 
         public SceneViewModel()
         {
@@ -36,6 +33,7 @@ namespace Stack.NET.ViewModel
             }
 
             Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
+            GridView = new GridViewModel();
 
             Render();
         }
@@ -59,7 +57,7 @@ namespace Stack.NET.ViewModel
         /// </summary>
         public RotateTransform3D Camera => 
             new RotateTransform3D(
-                new AxisAngleRotation3D(Up, _rotation),
+                new AxisAngleRotation3D(GridViewModel.Up, Rotation),
                 new Point3D());
 
         public Grid Grid { get; }
@@ -67,15 +65,15 @@ namespace Stack.NET.ViewModel
         public Point3D Position { get; private set; }
 
         public SelectionViewModel Selection { get; }
+        public GridViewModel GridView { get; }
         
-
         // Grid View Model
         public double Rotation
         {
-            get => _rotation;
+            get => GridView.Rotation;
             set
             {
-                _rotation = value;
+                GridView.Rotation = value;
                 RaisePropertyChangedEvent(nameof(Camera));
             }
         }
@@ -91,16 +89,14 @@ namespace Stack.NET.ViewModel
 
         public Model3DGroup SelectionModel => Selection.Model;
         public Transform3D SelectionTransform => Selection.Transform;
-        
+
         public ICommand RotateLeft
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation += MovementConstants.RotateFactor;
-                    RaisePropertyChangedEvent(nameof(SelectionModel));
-                    RaisePropertyChangedEvent(nameof(Camera));
+                    Rotation += MovementConstants.RotateFactor;
                 });
             }
         }
@@ -111,20 +107,11 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    _rotation -= MovementConstants.RotateFactor;
-                    RaisePropertyChangedEvent(nameof(SelectionModel));
-                    RaisePropertyChangedEvent(nameof(Camera));
+                    Rotation -= MovementConstants.RotateFactor;
                 });
             }
         }
-        
-        public ICommand MoveForward => Selection.MoveForward;
-        public ICommand MoveBackward => Selection.MoveBackward;
-        public ICommand MoveLeft => Selection.MoveLeft;
-        public ICommand MoveRight => Selection.MoveRight;
-        public ICommand MoveUp => Selection.MoveUp;
-        public ICommand MoveDown => Selection.MoveDown;
-        
+
         public ICommand PlaceCommand
         {
             get
