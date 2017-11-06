@@ -11,14 +11,14 @@ namespace Stack.NET.ViewModel
     {
         private static readonly Vector3D Up = new Vector3D(0.0, 1.0, 0.0);
 
-        private NamedColor _defaultNamedColor;
+        private NamedColor _selectedColor;
         private Model3DGroup _model;
         private double _rotation;
 
         public SceneViewModel()
         {
             Colors = NamedColorCollection.GetNamedColors();
-            _defaultNamedColor = Colors.Random();
+            _selectedColor = Colors.Random();
 
             Grid = new Grid
             {
@@ -31,7 +31,7 @@ namespace Stack.NET.ViewModel
             {
                 for (var z = 0; z < 6; z++)
                 {
-                    Grid.Place(x, 0, z, new Cube(_defaultNamedColor.Color));
+                    Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
                 }
             }
 
@@ -46,10 +46,10 @@ namespace Stack.NET.ViewModel
         /// <summary>The currently selected color.</summary>
         public NamedColor SelectedColor
         {
-            get => _defaultNamedColor;
+            get => _selectedColor;
             set
             {
-                _defaultNamedColor = value;
+                _selectedColor = value;
                 RaisePropertyChangedEvent(nameof(Model));
             }
         }
@@ -68,6 +68,8 @@ namespace Stack.NET.ViewModel
 
         public SelectionViewModel Selection { get; }
         
+
+        // Grid View Model
         public double Rotation
         {
             get => _rotation;

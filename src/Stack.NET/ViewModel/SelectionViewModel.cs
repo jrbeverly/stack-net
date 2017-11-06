@@ -27,7 +27,7 @@ namespace Stack.NET.ViewModel
                 return new TranslateTransform3D(pos.X - center.X, pos.Y - center.Y, pos.Z - center.Z);
             }
         }
-
+        
         public Color SelectedColor { get; set; }
         public Index3D Point { get; set; }
         public Model3DGroup Model { get; }
@@ -35,9 +35,7 @@ namespace Stack.NET.ViewModel
         //TODO: Remove dependency on Grid and move to a 'WorldSystem' instead
         public Grid Grid { get; }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating forward.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating forward.</summary>
         public ICommand MoveForward
         {
             get
@@ -50,9 +48,7 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating backward.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating backward.</summary>
         public ICommand MoveBackward
         {
             get
@@ -65,9 +61,7 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating left.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating left.</summary>
         public ICommand MoveLeft
         {
             get
@@ -80,9 +74,7 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating right.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating right.</summary>
         public ICommand MoveRight
         {
             get
@@ -95,9 +87,7 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating up.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating up.</summary>
         public ICommand MoveUp
         {
             get
@@ -110,9 +100,7 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating down.
-        /// </summary>
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating down.</summary>
         public ICommand MoveDown
         {
             get
@@ -125,34 +113,22 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Occurs when the forward command is executed.
-        /// </summary>
+        /// <summary>Occurs when the forward command is executed.</summary>
         public event Action OnForward;
 
-        /// <summary>
-        /// Occurs when the backward command is executed.
-        /// </summary>
+        /// <summary>Occurs when the backward command is executed.</summary>
         public event Action OnBackward;
 
-        /// <summary>
-        /// Occurs when the left command is executed.
-        /// </summary>
+        /// <summary>Occurs when the left command is executed.</summary>
         public event Action OnLeft;
 
-        /// <summary>
-        /// Occurs when the right command is executed.
-        /// </summary>
+        /// <summary>Occurs when the right command is executed.</summary>
         public event Action OnRight;
 
-        /// <summary>
-        /// Occurs when the up command is executed.
-        /// </summary>
+        /// <summary>Occurs when the up command is executed.</summary>
         public event Action OnUp;
 
-        /// <summary>
-        /// Occurs when the down command is executed.
-        /// </summary>
+        /// <summary>Occurs when the down command is executed.</summary>
         public event Action OnDown;
     }
 }

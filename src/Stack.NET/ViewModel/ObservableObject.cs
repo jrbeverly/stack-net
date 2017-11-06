@@ -1,16 +1,22 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Stack.NET.ViewModel
 {
+    /// <inheritdoc />
     /// <summary>Class that wraps an object, so that other classes can notify for Change events.</summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {
-        /// <summary>Event that gets invoked when the Value property changes.</summary>
+        /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChangedEvent(string propertyName)
+        /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
+        public void RaisePropertyChangedEvent([CallerMemberName]string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (propertyName != null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }
