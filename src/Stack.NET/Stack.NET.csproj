@@ -91,6 +91,7 @@
     <Compile Include="Model\NamedColorCollection.cs" />
     <Compile Include="Model\Padding.cs" />
     <Compile Include="Model\WorldSystem.cs" />
+    <Compile Include="Utility\GridConstants.cs" />
     <Compile Include="Utility\Index3D.cs" />
     <Compile Include="Utility\LinqExtensions.cs" />
     <Compile Include="Utility\MathHelper.cs" />

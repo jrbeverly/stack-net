@@ -10,10 +10,15 @@ namespace Stack.NET.Model
     public sealed class Grid
     {
         private readonly Dictionary<Index3D, Cube> _cubes;
+        private readonly WorldSystem _system;
 
         public Grid()
         {
             _cubes = new Dictionary<Index3D, Cube>();
+            _system = new WorldSystem
+            {
+                Padding = new Padding(GridConstants.Spacing)
+            };
         }
 
         public Color Surface { get; set; }
@@ -22,8 +27,11 @@ namespace Stack.NET.Model
         public IReadOnlyCollection<Index3D> Positions => _cubes.Keys;
 
         public double Segment { get; set; }
-        public double Length { get; set; }
-        public double HalfLength => Length / 2.0D;
+
+        public double Length {
+            get => _system.Length;
+            set => _system.Length = value;
+        }
 
         /// <summary>Places a cube at the specified position.</summary>
         /// <param name="x">The x-component of the index.</param>
@@ -109,12 +117,7 @@ namespace Stack.NET.Model
 
         public Point3D Position(Index3D position)
         {
-            return new Point3D
-            {
-                X = position.X * Segment + (Segment - Length) / 2.0D,
-                Y = position.Y * Segment,
-                Z = position.Z * Segment + (Segment - Length) / 2.0D
-            };
+            return _system.Get(position);
         }
     }
 }
