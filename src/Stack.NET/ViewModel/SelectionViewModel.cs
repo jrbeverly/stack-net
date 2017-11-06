@@ -8,8 +8,10 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.ViewModel
 {
-    internal sealed class SelectionViewModel
+    internal sealed class SelectionViewModel : ObservableObject
     {
+        private Index3D _point;
+
         public SelectionViewModel(Grid grid, Model3DGroup model)
         {
             Grid = grid;
@@ -29,7 +31,17 @@ namespace Stack.NET.ViewModel
         }
 
         public Color SelectedColor { get; set; }
-        public Index3D Point { get; set; }
+
+        public Index3D Point
+        {
+            get => _point;
+            set
+            {
+                _point = value;
+                RaisePropertyChangedEvent(nameof(Transform));
+            }
+        }
+
         public Model3DGroup Model { get; }
 
         //TODO: Remove dependency on Grid and move to a 'WorldSystem' instead

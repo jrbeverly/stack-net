@@ -29,7 +29,10 @@ namespace Stack.NET.ViewModel
                 Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
 
             Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
+            Selection.PropertyChanged += (sender, args) => { RaisePropertyChangedEvent(nameof(SelectionTransform)); };
+
             GridView = new GridViewModel();
+            GridView.PropertyChanged += (sender, args) => { RaisePropertyChangedEvent(nameof(Model)); };
 
             Render();
         }
