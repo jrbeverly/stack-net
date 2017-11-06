@@ -20,9 +20,8 @@ namespace Stack.NET.Model
                 Padding = new Padding(GridConstants.Spacing)
             };
         }
-
-        public Color Surface { get; set; }
-
+        
+        public IReadOnlyCollection<KeyValuePair<Index3D, Cube>> Values => _cubes;
         public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
         public IReadOnlyCollection<Index3D> Positions => _cubes.Keys;
 
@@ -76,10 +75,10 @@ namespace Stack.NET.Model
             var vmax = new Index3D(int.MinValue, int.MinValue, int.MinValue);
             var vmin = new Index3D(int.MaxValue, int.MaxValue, int.MaxValue);
 
-            foreach (var index in Cubes)
+            foreach (var index in Positions)
             {
-                vmin = Index3D.Min(vmin, index.Position);
-                vmax = Index3D.Max(vmax, index.Position);
+                vmin = Index3D.Min(vmin, index);
+                vmax = Index3D.Max(vmax, index);
             }
 
             min = vmin;
@@ -101,18 +100,7 @@ namespace Stack.NET.Model
         public Point3D Center()
         {
             Range(out var min, out var max);
-
-            var center = new Point3D(
-                MathHelper.Center(min.X, max.X + 1),
-                MathHelper.Center(min.Y, max.Y + 1),
-                MathHelper.Center(min.Z, max.Z + 1));
-
-            return new Point3D
-            {
-                X = center.X * Segment,
-                Y = center.Y * Segment,
-                Z = center.Z * Segment
-            };
+            return _system.Center(min, max);
         }
 
         public Point3D Position(Index3D position)

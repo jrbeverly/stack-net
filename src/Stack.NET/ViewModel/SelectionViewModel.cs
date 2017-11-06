@@ -3,7 +3,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
-using Stack.NET.Controls;
 using Stack.NET.Model;
 using Stack.NET.Utility;
 
@@ -37,7 +36,7 @@ namespace Stack.NET.ViewModel
         public Grid Grid { get; }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating forward.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating forward.
         /// </summary>
         public ICommand MoveForward
         {
@@ -52,7 +51,7 @@ namespace Stack.NET.ViewModel
         }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating backward.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating backward.
         /// </summary>
         public ICommand MoveBackward
         {
@@ -67,7 +66,7 @@ namespace Stack.NET.ViewModel
         }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating left.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating left.
         /// </summary>
         public ICommand MoveLeft
         {
@@ -82,7 +81,7 @@ namespace Stack.NET.ViewModel
         }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating right.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating right.
         /// </summary>
         public ICommand MoveRight
         {
@@ -97,7 +96,7 @@ namespace Stack.NET.ViewModel
         }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating up.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating up.
         /// </summary>
         public ICommand MoveUp
         {
@@ -112,7 +111,7 @@ namespace Stack.NET.ViewModel
         }
 
         /// <summary>
-        /// Moves the <see cref="SelectionCube"/> by a unit vector designating down.
+        /// Moves the <see cref="Stack.NET.Controls.SelectionCube"/> by a unit vector designating down.
         /// </summary>
         public ICommand MoveDown
         {

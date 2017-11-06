@@ -9,6 +9,8 @@ namespace Stack.NET.ViewModel
 {
     internal sealed class SceneViewModel : ObservableObject
     {
+        private static readonly Vector3D Up = new Vector3D(0.0, 1.0, 0.0);
+
         private NamedColor _defaultNamedColor;
         private Model3DGroup _model;
         private double _rotation;
@@ -17,12 +19,11 @@ namespace Stack.NET.ViewModel
         {
             Colors = NamedColorCollection.GetNamedColors();
             _defaultNamedColor = Colors.Random();
-            
+
             Grid = new Grid
             {
                 Length = 5.0D,
-                Segment = 6.0D,
-                Surface = System.Windows.Media.Colors.CornflowerBlue
+                Segment = 6.0D
             };
 
             Position = new Point3D(50, 50, 50);
@@ -30,7 +31,7 @@ namespace Stack.NET.ViewModel
             {
                 for (var z = 0; z < 6; z++)
                 {
-                    Grid.Place(x, 0, z, new Cube(new Index3D(x, 0, z), Grid.Surface));
+                    Grid.Place(x, 0, z, new Cube(_defaultNamedColor.Color));
                 }
             }
 
@@ -49,21 +50,24 @@ namespace Stack.NET.ViewModel
             set
             {
                 _defaultNamedColor = value;
-                Grid.Surface = _defaultNamedColor.Color;
                 RaisePropertyChangedEvent(nameof(Model));
             }
         }
+
+        /// <summary>
+        /// Gets the camera of the scene.
+        /// </summary>
+        public RotateTransform3D Camera => 
+            new RotateTransform3D(
+                new AxisAngleRotation3D(Up, _rotation),
+                new Point3D());
 
         public Grid Grid { get; }
 
         public Point3D Position { get; private set; }
 
         public SelectionViewModel Selection { get; }
-
-        public RotateTransform3D Camera => new RotateTransform3D(
-            new AxisAngleRotation3D(new Vector3D(0.0, 1.0, 0.0), _rotation),
-            new Point3D());
-
+        
         public double Rotation
         {
             get => _rotation;
@@ -125,7 +129,7 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(Selection.Point, new Cube(Selection.Point, SelectedColor.Color));
+                    Grid.Place(Selection.Point, new Cube(SelectedColor.Color));
                     RaisePropertyChangedEvent(nameof(Model));
                     RaisePropertyChangedEvent(nameof(Selection));
                 });
@@ -160,10 +164,10 @@ namespace Stack.NET.ViewModel
         {
             var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor);
             var grid = new Model3DGroup();
-            foreach (var cube in Grid.Cubes)
+            foreach (var cube in Grid.Values)
             {
-                var model = cubeBuilder.Create(cube.Surface);
-                var position = Grid.Position(cube.Position);
+                var model = cubeBuilder.Create(cube.Value.Surface);
+                var position = Grid.Position(cube.Key);
                 model.Transform = new TranslateTransform3D(position.X, position.Y, position.Z);
 
                 grid.Children.Add(model);
