@@ -14,7 +14,7 @@ namespace Stack.NET.Model
             return new Point3D
             {
                 X = position.X * (Length + Padding.Horizontal) + Padding.Left,
-                Y = position.Y * (Length + Padding.Vertical)  + Padding.Down,
+                Y = position.Y * (Length + Padding.Vertical) + Padding.Down,
                 Z = position.Z * (Length + Padding.Depth) + Padding.Backward
             };
         }
@@ -27,7 +27,7 @@ namespace Stack.NET.Model
             {
                 X = posMin.X + (posMax.X - posMin.X),
                 Y = posMin.Y + (posMax.Y - posMin.Y),
-                Z = posMin.Z + (posMax.Z - posMin.Z),
+                Z = posMin.Z + (posMax.Z - posMin.Z)
             };
         }
     }

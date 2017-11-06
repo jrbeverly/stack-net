@@ -8,10 +8,10 @@ namespace Stack.NET.ViewModel
     public sealed class GridViewModel : ObservableObject
     {
         public static readonly Vector3D Up = new Vector3D(0.0, 1.0, 0.0);
-        
+
         private readonly Model3DGroup _model;
         private double _rotation;
-        
+
         public Transform3D Transform => new RotateTransform3D(new AxisAngleRotation3D(Up, _rotation), new Point3D());
 
         public double Rotation
@@ -26,24 +26,12 @@ namespace Stack.NET.ViewModel
 
         public ICommand RotateLeft
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    _rotation += MovementConstants.RotateFactor;
-                });
-            }
+            get { return new ActionCommand(() => { _rotation += MovementConstants.RotateFactor; }); }
         }
 
         public ICommand RotateRight
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    _rotation -= MovementConstants.RotateFactor;
-                });
-            }
+            get { return new ActionCommand(() => { _rotation -= MovementConstants.RotateFactor; }); }
         }
     }
 }

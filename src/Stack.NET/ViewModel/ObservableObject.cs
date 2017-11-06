@@ -10,13 +10,11 @@ namespace Stack.NET.ViewModel
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
-        public void RaisePropertyChangedEvent([CallerMemberName]string propertyName = null)
+        /// <summary>Raises the <see cref="PropertyChanged" /> event.</summary>
+        public void RaisePropertyChangedEvent([CallerMemberName] string propertyName = null)
         {
             if (propertyName != null)
-            {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }

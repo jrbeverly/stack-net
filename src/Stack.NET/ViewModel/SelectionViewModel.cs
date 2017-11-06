@@ -27,7 +27,7 @@ namespace Stack.NET.ViewModel
                 return new TranslateTransform3D(pos.X - center.X, pos.Y - center.Y, pos.Z - center.Z);
             }
         }
-        
+
         public Color SelectedColor { get; set; }
         public Index3D Point { get; set; }
         public Model3DGroup Model { get; }

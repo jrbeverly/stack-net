@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Stack.NET.Utility;
 
@@ -20,14 +19,15 @@ namespace Stack.NET.Model
                 Padding = new Padding(GridConstants.Spacing)
             };
         }
-        
+
         public IReadOnlyCollection<KeyValuePair<Index3D, Cube>> Values => _cubes;
         public IReadOnlyCollection<Cube> Cubes => _cubes.Values;
         public IReadOnlyCollection<Index3D> Positions => _cubes.Keys;
 
         public double Segment { get; set; }
 
-        public double Length {
+        public double Length
+        {
             get => _system.Length;
             set => _system.Length = value;
         }

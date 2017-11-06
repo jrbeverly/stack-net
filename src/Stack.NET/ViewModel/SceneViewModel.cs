@@ -9,8 +9,8 @@ namespace Stack.NET.ViewModel
 {
     internal sealed class SceneViewModel : ObservableObject
     {
-        private NamedColor _selectedColor;
         private Model3DGroup _model;
+        private NamedColor _selectedColor;
 
         public SceneViewModel()
         {
@@ -25,12 +25,8 @@ namespace Stack.NET.ViewModel
 
             Position = new Point3D(50, 50, 50);
             for (var x = 0; x < 6; x++)
-            {
-                for (var z = 0; z < 6; z++)
-                {
-                    Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
-                }
-            }
+            for (var z = 0; z < 6; z++)
+                Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
 
             Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
             GridView = new GridViewModel();
@@ -52,10 +48,8 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the camera of the scene.
-        /// </summary>
-        public RotateTransform3D Camera => 
+        /// <summary>Gets the camera of the scene.</summary>
+        public RotateTransform3D Camera =>
             new RotateTransform3D(
                 new AxisAngleRotation3D(GridViewModel.Up, Rotation),
                 new Point3D());
@@ -66,7 +60,7 @@ namespace Stack.NET.ViewModel
 
         public SelectionViewModel Selection { get; }
         public GridViewModel GridView { get; }
-        
+
         // Grid View Model
         public double Rotation
         {
@@ -92,24 +86,12 @@ namespace Stack.NET.ViewModel
 
         public ICommand RotateLeft
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Rotation += MovementConstants.RotateFactor;
-                });
-            }
+            get { return new ActionCommand(() => { Rotation += MovementConstants.RotateFactor; }); }
         }
 
         public ICommand RotateRight
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Rotation -= MovementConstants.RotateFactor;
-                });
-            }
+            get { return new ActionCommand(() => { Rotation -= MovementConstants.RotateFactor; }); }
         }
 
         public ICommand PlaceCommand
