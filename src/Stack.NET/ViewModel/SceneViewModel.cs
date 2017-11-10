@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
+using Stack.NET.Construct;
 using Stack.NET.Geometry;
 using Stack.NET.Model;
 using Stack.NET.Utility;
@@ -28,7 +29,7 @@ namespace Stack.NET.ViewModel
             for (var z = 0; z < 6; z++)
                 Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
 
-            Selection = new SelectionViewModel(Grid, InitializeSelectionModel());
+            Selection = new SelectionViewModel(Grid, CubeHelper.CreateSelection());
             Selection.PropertyChanged += (sender, args) => { RaisePropertyChangedEvent(nameof(SelectionTransform)); };
 
             GridView = new GridViewModel();
@@ -121,17 +122,6 @@ namespace Stack.NET.ViewModel
                     RaisePropertyChangedEvent(nameof(Selection));
                 });
             }
-        }
-
-        public Model3DGroup InitializeSelectionModel()
-        {
-            var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor + 0.01D);
-            var cube = cubeBuilder.Create(System.Windows.Media.Colors.Red, 0, 0, 0);
-
-            var group = new Model3DGroup();
-            group.Children.Add(cube);
-
-            return group;
         }
 
         private void Render()
