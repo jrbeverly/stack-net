@@ -8,17 +8,15 @@ using Stack.NET.Utility;
 
 namespace Stack.NET.ViewModel
 {
-    internal sealed class SelectionViewModel
+    internal sealed class SelectionViewModel : ObservableObject
     {
-        private readonly ObservableObject _object;
+        private Index3D _point;
 
-        public SelectionViewModel(ObservableObject observable, Grid3D grid, Model3DGroup model)
+        public SelectionViewModel(Grid grid, Model3DGroup model)
         {
-            _object = observable;
             Grid = grid;
             Model = model;
 
-            Point = new Index3D(0, 0, 0);
             SelectedColor = Colors.Black;
         }
 
@@ -33,106 +31,116 @@ namespace Stack.NET.ViewModel
         }
 
         public Color SelectedColor { get; set; }
-        public Index3D Point { get; set; }
-        public Model3DGroup Model { get; }
-        public Grid3D Grid { get; }
 
+        public Index3D Point
+        {
+            get => _point;
+            set
+            {
+                _point = value;
+                RaisePropertyChangedEvent(nameof(Transform));
+            }
+        }
+
+        public Model3DGroup Model { get; }
+
+        //TODO: Remove dependency on Grid and move to a 'WorldSystem' instead
+        public Grid Grid { get; }
+
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating forward.</summary>
         public ICommand MoveForward
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Z -= 1;
+                    Point = Point + Index3D.Forward;
                     OnForward?.Invoke();
                 });
             }
         }
 
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating backward.</summary>
         public ICommand MoveBackward
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Z += 1;
+                    Point = Point + Index3D.Backward;
                     OnBackward?.Invoke();
                 });
             }
         }
 
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating left.</summary>
         public ICommand MoveLeft
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.X -= 1;
+                    Point = Point + Index3D.Left;
                     OnLeft?.Invoke();
                 });
             }
         }
 
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating right.</summary>
         public ICommand MoveRight
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.X += 1;
+                    Point = Point + Index3D.Right;
                     OnRight?.Invoke();
                 });
             }
         }
 
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating up.</summary>
         public ICommand MoveUp
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Y += 1;
+                    Point = Point + Index3D.Up;
                     OnUp?.Invoke();
                 });
             }
         }
 
+        /// <summary>Moves the <see cref="Stack.NET.Controls.SelectionCube" /> by a unit vector designating down.</summary>
         public ICommand MoveDown
         {
             get
             {
                 return new ActionCommand(() =>
                 {
-                    Point.Y -= 1;
+                    Point = Point + Index3D.Down;
                     OnDown?.Invoke();
                 });
             }
         }
 
-        public ICommand PlaceCommand
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Grid.Place(Point.X, Point.Y, Point.Z, SelectedColor);
-                    OnPlace?.Invoke();
-                });
-            }
-        }
+        /// <summary>Occurs when the forward command is executed.</summary>
+        public event Action OnForward;
 
-        public ICommand DestroyCommand
-        {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    Grid.Destroy(Point.X, Point.Y, Point.Z);
-                    OnDestroy?.Invoke();
-                });
-            }
-        }
+        /// <summary>Occurs when the backward command is executed.</summary>
+        public event Action OnBackward;
 
-        public event Action OnForward, OnBackward, OnLeft, OnRight, OnUp, OnDown, OnPlace, OnDestroy;
+        /// <summary>Occurs when the left command is executed.</summary>
+        public event Action OnLeft;
+
+        /// <summary>Occurs when the right command is executed.</summary>
+        public event Action OnRight;
+
+        /// <summary>Occurs when the up command is executed.</summary>
+        public event Action OnUp;
+
+        /// <summary>Occurs when the down command is executed.</summary>
+        public event Action OnDown;
     }
 }

@@ -1,67 +1,77 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Stack.NET.Commands;
 using Stack.NET.Construct;
+using Stack.NET.Geometry;
 using Stack.NET.Model;
 using Stack.NET.Utility;
-using Color = System.Drawing.Color;
 
 namespace Stack.NET.ViewModel
 {
-    using DrawColor = Color;
-    using MediaColor = System.Windows.Media.Color;
-
     internal sealed class SceneViewModel : ObservableObject
     {
-        private const double MOVE = 6.0;
-        private const double ROTATE_FACTOR = 3.5D;
-        private const double SCALE_FACTOR = 5.0D;
-
-        private readonly SelectionViewModel _selection;
         private Model3DGroup _model;
-        private double _rotation;
+        private NamedColor _selectedColor;
 
         public SceneViewModel()
         {
-            Grid = new Grid3D
+            Colors = NamedColorCollection.GetNamedColors();
+            _selectedColor = Colors.Random();
+
+            Grid = new Grid
             {
                 Length = 5.0D,
-                Segment = 6.0D,
-                Surface = Colors.CornflowerBlue
+                Segment = 6.0D
             };
 
             Position = new Point3D(50, 50, 50);
-            ListOfColors = ColorHelper.GetColors();
-
             for (var x = 0; x < 6; x++)
             for (var z = 0; z < 6; z++)
-                Grid.Place(x, 0, z, Grid.Surface);
+                Grid.Place(x, 0, z, new Cube(_selectedColor.Color));
 
-            _selection = new SelectionViewModel(this, Grid, InitializeSelectionModel());
+            Selection = new SelectionViewModel(Grid, CubeHelper.CreateSelection());
+            Selection.PropertyChanged += (sender, args) => { RaisePropertyChangedEvent(nameof(SelectionTransform)); };
+
+            GridView = new GridViewModel();
+            GridView.PropertyChanged += (sender, args) => { RaisePropertyChangedEvent(nameof(Model)); };
 
             Render();
         }
 
-        public Grid3D Grid { get; }
+        /// <summary>A collection of named colors.</summary>
+        public NamedColorCollection Colors { get; }
+
+        /// <summary>The currently selected color.</summary>
+        public NamedColor SelectedColor
+        {
+            get => _selectedColor;
+            set
+            {
+                _selectedColor = value;
+                RaisePropertyChangedEvent(nameof(Model));
+            }
+        }
+
+        /// <summary>Gets the camera of the scene.</summary>
+        public RotateTransform3D Camera =>
+            new RotateTransform3D(
+                new AxisAngleRotation3D(GridViewModel.Up, Rotation),
+                new Point3D());
+
+        public Grid Grid { get; }
 
         public Point3D Position { get; private set; }
 
-        public IEnumerable<DrawColor> ListOfColors { get; }
+        public SelectionViewModel Selection { get; }
+        public GridViewModel GridView { get; }
 
-        public SelectionViewModel Selection { get; set; }
-
-        public RotateTransform3D Camera => new RotateTransform3D(
-            new AxisAngleRotation3D(new Vector3D(0.0, 1.0, 0.0), _rotation),
-            new Point3D());
-
+        // Grid View Model
         public double Rotation
         {
-            get => _rotation;
+            get => GridView.Rotation;
             set
             {
-                _rotation = value;
+                GridView.Rotation = value;
                 RaisePropertyChangedEvent(nameof(Camera));
             }
         }
@@ -75,44 +85,17 @@ namespace Stack.NET.ViewModel
             }
         }
 
-        public DrawColor SelectedColor
-        {
-            get => ColorHelper.Convert(CubeColor);
-            set
-            {
-                CubeColor = ColorHelper.Convert(value);
-                RaisePropertyChangedEvent(nameof(Model));
-            }
-        }
-
-        public MediaColor CubeColor
-        {
-            get => Grid.Surface;
-            set => Grid.Surface = value;
-        }
+        public Model3DGroup SelectionModel => Selection.Model;
+        public Transform3D SelectionTransform => Selection.Transform;
 
         public ICommand RotateLeft
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    _rotation += ROTATE_FACTOR;
-                    RaisePropertyChangedEvent(nameof(Camera));
-                });
-            }
+            get { return new ActionCommand(() => { Rotation += MovementConstants.RotateFactor; }); }
         }
 
         public ICommand RotateRight
         {
-            get
-            {
-                return new ActionCommand(() =>
-                {
-                    _rotation -= ROTATE_FACTOR;
-                    RaisePropertyChangedEvent(nameof(Camera));
-                });
-            }
+            get { return new ActionCommand(() => { Rotation -= MovementConstants.RotateFactor; }); }
         }
 
         public ICommand PlaceCommand
@@ -121,43 +104,34 @@ namespace Stack.NET.ViewModel
             {
                 return new ActionCommand(() =>
                 {
-                    Grid.Place(_selection.Point.X, _selection.Point.Y, _selection.Point.Z,
-                        ColorHelper.Convert(SelectedColor));
+                    Grid.Place(Selection.Point, new Cube(SelectedColor.Color));
                     RaisePropertyChangedEvent(nameof(Model));
                     RaisePropertyChangedEvent(nameof(Selection));
                 });
             }
         }
 
-        public ICommand MoveForward => _selection.MoveForward;
-        public ICommand MoveBackward => _selection.MoveBackward;
-        public ICommand MoveLeft => _selection.MoveLeft;
-        public ICommand MoveRight => _selection.MoveRight;
-        public ICommand MoveUp => _selection.MoveUp;
-        public ICommand MoveDown => _selection.MoveDown;
-        public ICommand DestroyCommand => _selection.DestroyCommand;
-
-        public Model3DGroup InitializeSelectionModel()
+        public ICommand DestroyCommand
         {
-            var cubeBuilder = new CubeBuilder(SCALE_FACTOR + 0.01D);
-            var cube = cubeBuilder.Create(Colors.Red, 0, 0, 0);
-
-            var group = new Model3DGroup();
-            group.Children.Add(cube);
-
-            return group;
+            get
+            {
+                return new ActionCommand(() =>
+                {
+                    Grid.Destroy(Selection.Point);
+                    RaisePropertyChangedEvent(nameof(Model));
+                    RaisePropertyChangedEvent(nameof(Selection));
+                });
+            }
         }
 
         private void Render()
         {
-            var cubeBuilder = new CubeBuilder(SCALE_FACTOR);
+            var cubeBuilder = new CubeBuilder(MovementConstants.ScaleFactor);
             var grid = new Model3DGroup();
-            for (var i = 0; i < Grid.Cubes.Count; i++)
+            foreach (var cube in Grid.Values)
             {
-                var cube = Grid.Cubes[i];
-
-                var model = cubeBuilder.Create(cube.Surface);
-                var position = Grid.Position(cube.Position);
+                var model = cubeBuilder.Create(cube.Value.Surface);
+                var position = Grid.Position(cube.Key);
                 model.Transform = new TranslateTransform3D(position.X, position.Y, position.Z);
 
                 grid.Children.Add(model);

@@ -27,44 +27,16 @@ namespace Stack.NET.Utility
         /// <param name="value2">Source value.</param>
         /// <returns>Interpolated value.</returns>
         /// <remarks>
-        ///     This method performs the linear interpolation based on the following formula.
-        ///     <code>
+        /// This method performs the linear interpolation based on the following formula.
+        /// <code>
         /// value1 + (value2 - value1) * amount
         /// </code>
-        ///     Passing amount a value of 0 will cause value1 to be returned, a value of 1 will cause value2 to be returned.
+        /// Passing amount a value of 0 will cause value1 to be returned, a value of 1 will cause value2 to be returned.
         /// </remarks>
-        /// <seealso cref="https://msdn.microsoft.com/en-us/library/microsoft.xna.framework.mathhelper.lerp.aspx" />
+        /// <seealso cref="http://msdn.microsoft.com/en-us/library/microsoft.xna.framework.mathhelper.lerp.aspx" />
         public static double Center(int value1, int value2)
         {
             return value1 + (Math.Abs(value2) + (double) Math.Abs(value1)) / 2.0D;
-        }
-
-        /// <summary>Returns a vector that contains the highest value from each matching pair of components.</summary>
-        /// <param name="value1">Source vector.</param>
-        /// <param name="value2">Source vector.</param>
-        /// <returns>The maximized vector.</returns>
-        public static Index3D Maximum(Index3D value1, Index3D value2)
-        {
-            return new Index3D
-            {
-                X = Math.Max(value1.X, value2.X),
-                Y = Math.Max(value1.Y, value2.Y),
-                Z = Math.Max(value1.Z, value2.Z)
-            };
-        }
-
-        /// <summary>Returns a vector that contains the lowest value from each matching pair of components.</summary>
-        /// <param name="value1">Source vector.</param>
-        /// <param name="value2">Source vector.</param>
-        /// <returns>The minimized vector.</returns>
-        public static Index3D Minimum(Index3D value1, Index3D value2)
-        {
-            return new Index3D
-            {
-                X = Math.Min(value1.X, value2.X),
-                Y = Math.Min(value1.Y, value2.Y),
-                Z = Math.Min(value1.Z, value2.Z)
-            };
         }
     }
 }

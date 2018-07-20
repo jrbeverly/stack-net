@@ -82,13 +82,31 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
-    <Compile Include="Utility\ColorHelper.cs" />
+    <Compile Include="Construct\CubeHelper.cs" />
+    <Compile Include="Controls\GridView.cs" />
+    <Compile Include="Controls\NamedColorBox.xaml.cs">
+      <DependentUpon>NamedColorBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectionCube.cs" />
+    <Compile Include="Geometry\ICubeBuilder.cs" />
+    <Compile Include="Geometry\IGeometryBuilder.cs" />
+    <Compile Include="Model\NamedColorCollection.cs" />
+    <Compile Include="Model\Padding.cs" />
+    <Compile Include="Model\WorldSystem.cs" />
+    <Compile Include="Utility\GridConstants.cs" />
     <Compile Include="Utility\Index3D.cs" />
+    <Compile Include="Utility\LinqExtensions.cs" />
     <Compile Include="Utility\MathHelper.cs" />
+    <Compile Include="Utility\MovementConstants.cs" />
+    <Compile Include="Model\NamedColor.cs" />
     <Compile Include="ViewModel\GridViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SceneViewModel.cs" />
     <Compile Include="ViewModel\SelectionViewModel.cs" />
+    <Page Include="Controls\NamedColorBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,8 +115,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Construct\CubeBuilder.cs" />
-    <Compile Include="Construct\ModelBuilder.cs" />
+    <Compile Include="Geometry\CubeBuilder.cs" />
+    <Compile Include="Geometry\GeometryBuilder.cs" />
     <Compile Include="Converters\ColorToSolidBrushConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -107,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Cube.cs" />
-    <Compile Include="Model\Grid3D.cs" />
+    <Compile Include="Model\Grid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -138,6 +156,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
