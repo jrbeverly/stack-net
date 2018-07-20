@@ -1,23 +1,20 @@
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace Stack.NET.Construct
+namespace Stack.NET.Geometry
 {
-    /// <summary>A builder to construct a <see cref="MeshGeometry3D" /> objects.</summary>
-    public sealed class ModelBuilder
+    /// <inheritdoc />
+    public sealed class GeometryBuilder : IGeometryBuilder
     {
         private readonly MeshGeometry3D _mesh;
 
-        /// <summary>Initializes a new instance of the <see cref="ModelBuilder" /> class.</summary>
-        public ModelBuilder()
+        /// <summary>Initializes a new instance of the <see cref="GeometryBuilder" /> class.</summary>
+        public GeometryBuilder()
         {
             _mesh = new MeshGeometry3D();
         }
 
-        /// <summary>Appends a triangle to the underlying <see cref="MeshGeometry3D" />.</summary>
-        /// <param name="p0">Source vertex.</param>
-        /// <param name="p1">Source vertex.</param>
-        /// <param name="p2">Source vertex.</param>
+        /// <inheritdoc />
         public void AddTriangle(Point3D p0, Point3D p1, Point3D p2)
         {
             _mesh.Positions.Add(p0);
@@ -30,9 +27,7 @@ namespace Stack.NET.Construct
             _mesh.TriangleIndices.Add(count + 2);
         }
 
-        /// <summary>Constructs a <see cref="GeometryModel3D" /> from the underlying triangle mesh.</summary>
-        /// <param name="color">The <see cref="Color" /> of the model.</param>
-        /// <returns>The 3d geometry mesh.</returns>
+        /// <inheritdoc />
         public GeometryModel3D Build(Color color)
         {
             var material = new DiffuseMaterial(new SolidColorBrush(color));
@@ -41,9 +36,7 @@ namespace Stack.NET.Construct
             return geometry;
         }
 
-        /// <summary>Constructs a wireframe <see cref="GeometryModel3D" /> from the underlying triangle mesh.</summary>
-        /// <param name="color">The <see cref="Color" /> of the model.</param>
-        /// <returns>The 3d geometry mesh.</returns>
+        /// <inheritdoc />
         public GeometryModel3D Wireframe(Color color)
         {
             var material = new DiffuseMaterial(new RadialGradientBrush(Colors.DimGray, Colors.WhiteSmoke));
