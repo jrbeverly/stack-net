@@ -4,9 +4,9 @@
 
 A block blueprinter, built using a visual graph style approach to graphics.
 
-## Notes
+## Getting Started
 
-A repository experimenting with MVVM for Graphics.
+The project is based on the old approach to C# projects. The project should be opened in Visual Studio, built, then run.
 
 ## Acknowledgements
 
