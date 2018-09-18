@@ -2,7 +2,11 @@
 
 ## Summary
 
-## Usage
+A block blueprinter, built using a visual graph style approach to graphics.
+
+## Notes
+
+A repository experimenting with MVVM for Graphics.
 
 ## Acknowledgements
 
