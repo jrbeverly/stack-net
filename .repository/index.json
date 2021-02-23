@@ -17,6 +17,7 @@
     "design"
   ],
   "languages": [
-    "C#"
+    "C#",
+    "Dockerfile"
   ]
 }
